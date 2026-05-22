@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Zenvaio — AI Automation Systems for Growing Businesses</title>
+<meta name="description" content="Zenvaio designs and manages AI-powered automation systems tailored to your business — so every lead gets a response, every appointment gets booked, and you can focus on the work you love." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --navy: #0D1F2D;
+  --navy-deep: #052535;
+  --teal: #00C896;
+  --teal-light: #00E8AE;
+  --teal-dark: #009A72;
+  --pale-teal: #E0FAF4;
+  --teal-border: #C8EFE6;
+  --page-green: #F0FAF7;
+  --text-muted: #5A7A8A;
+  --green-dark: #057A5A;
+  --white: #FFFFFF;
+  --hero-grad: linear-gradient(135deg, #0D1F2D 0%, #052535 100%);
+  --cta-grad: linear-gradient(135deg, #00C896 0%, #009A72 100%);
+  --font: 'Plus Jakarta Sans', Arial, sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font); color: var(--navy); background: var(--white); overflow-x: hidden; }
+
+/* ANNOUNCEMENT BAR */
+.announce-bar {
+  background: var(--navy-deep);
+  border-bottom: 1px solid rgba(0,200,150,0.2);
+  padding: 9px 20px;
+  text-align: center;
+  font-size: 13px;
+  color: rgba(255,255,255,0.75);
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  flex-wrap: wrap;
+}
+.announce-bar .stars { color: #FFD700; letter-spacing: 2px; }
+.announce-bar a { color: var(--teal); text-decoration: none; font-weight: 700; }
+.announce-bar a:hover { color: var(--teal-light); }
+
+/* NAV */
+nav {
+  position: sticky; top: 0; z-index: 1000;
+  height: 64px; background: var(--navy);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 60px;
+  border-bottom: 1px solid rgba(0,200,150,0.1);
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none;
+}
+.nav-logo-svg {
+  width: 40px; height: 40px; flex-shrink: 0;
+}
+.nav-logo-text {
+  font-size: 20px; font-weight: 800; color: var(--white);
+  letter-spacing: 3px; text-transform: uppercase;
+}
+.nav-logo-text span { color: var(--teal); }
+
+.nav-center {
+  display: flex; align-items: center; gap: 6px; list-style: none;
+}
+.nav-center li { position: relative; }
+.nav-center li > a,
+.nav-center li > button {
+  font-family: var(--font); font-size: 14px; font-weight: 500;
+  color: rgba(255,255,255,0.70); text-decoration: none;
+  background: none; border: none; cursor: pointer;
+  padding: 8px 14px; border-radius: 6px;
+  display: flex; align-items: center; gap: 5px;
+  transition: color .2s, background .2s; white-space: nowrap;
+}
+.nav-center li > a:hover, .nav-center li > button:hover {
+  color: var(--white); background: rgba(255,255,255,0.06);
+}
+.chevron {
+  width: 10px; height: 10px;
+  border-right: 2px solid currentColor; border-bottom: 2px solid currentColor;
+  transform: rotate(45deg) translateY(-2px); transition: transform .2s; display: inline-block;
+}
+.nav-center li:hover .chevron { transform: rotate(225deg) translateY(-2px); }
+.dropdown {
+  position: absolute; top: calc(100% + 8px); left: 50%;
+  transform: translateX(-50%) translateY(-6px);
+  min-width: 260px; background: var(--navy);
+  border: 1px solid rgba(0,200,150,0.15);
+  border-radius: 12px; padding: 8px;
+  opacity: 0; pointer-events: none;
+  transition: opacity .2s, transform .2s;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+}
+.nav-center li:hover .dropdown {
+  opacity: 1; pointer-events: all; transform: translateX(-50%) translateY(0);
+}
+.dropdown a {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 10px 12px; border-radius: 8px; text-decoration: none; transition: background .15s;
+}
+.dropdown a:hover { background: rgba(255,255,255,0.06); }
+.dd-icon {
+  width: 32px; height: 32px; background: rgba(0,200,150,0.12);
+  border-radius: 8px; display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; font-size: 14px;
+}
+.dd-text strong { display: block; font-size: 13px; font-weight: 700; color: var(--white); margin-bottom: 2px; }
+.dd-text span { font-size: 11.5px; color: rgba(255,255,255,0.45); line-height: 1.4; }
+
+.nav-right { display: flex; align-items: center; gap: 10px; }
+.btn-nav {
+  font-family: var(--font); font-size: 14px; font-weight: 700;
+  background: var(--teal); color: var(--navy-deep);
+  border: none; cursor: pointer; padding: 9px 20px; border-radius: 7px;
+  transition: opacity .2s, transform .1s; text-decoration: none; white-space: nowrap;
+}
+.btn-nav:hover { opacity: .88; transform: translateY(-1px); }
+
+.hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer; padding: 6px;
+}
+.hamburger span { width: 22px; height: 2px; background: rgba(255,255,255,0.7); border-radius: 2px; transition: .3s; }
+
+/* HERO */
+.hero {
+  background: var(--hero-grad);
+  padding: 100px 60px 110px;
+  text-align: center; position: relative; overflow: hidden;
+}
+.hero::before, .hero::after {
+  content: ''; position: absolute; border-radius: 50%; pointer-events: none;
+}
+.hero::before {
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(0,200,150,0.07) 0%, transparent 70%);
+  right: -150px; top: -150px;
+}
+.hero::after {
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(0,200,150,0.05) 0%, transparent 70%);
+  left: -100px; bottom: -100px;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(0,200,150,0.12); border: 1px solid rgba(0,200,150,0.30);
+  color: var(--teal-light); font-size: 11px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  padding: 7px 16px; border-radius: 99px; margin-bottom: 32px;
+}
+.hero-badge::before {
+  content: ''; width: 6px; height: 6px;
+  background: var(--teal); border-radius: 50%; animation: pulse 2s infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.4)} }
+.hero h1 {
+  font-size: clamp(36px, 5vw, 54px); font-weight: 800; color: var(--white);
+  line-height: 1.15; max-width: 820px; margin: 0 auto 20px; letter-spacing: -1px;
+}
+.hero h1 .accent { color: var(--teal); }
+.hero-sub {
+  font-size: 17px; color: rgba(255,255,255,0.52);
+  max-width: 560px; margin: 0 auto 44px; line-height: 1.8; font-weight: 400;
+}
+.hero-btns { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+.btn-primary {
+  font-family: var(--font); font-size: 15px; font-weight: 700;
+  background: var(--teal); color: var(--navy-deep);
+  border: none; cursor: pointer; padding: 15px 34px; border-radius: 8px;
+  transition: opacity .2s, transform .15s; text-decoration: none; display: inline-block;
+}
+.btn-primary:hover { opacity: .88; transform: translateY(-2px); }
+.btn-secondary {
+  font-family: var(--font); font-size: 15px; font-weight: 600;
+  background: transparent; color: var(--white);
+  border: 1px solid rgba(255,255,255,0.22); cursor: pointer;
+  padding: 15px 34px; border-radius: 8px;
+  transition: background .2s, border-color .2s; text-decoration: none; display: inline-block;
+}
+.btn-secondary:hover { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.4); }
+
+.trusted-bar {
+  background: rgba(255,255,255,0.05); border-top: 1px solid rgba(255,255,255,0.08);
+  margin-top: 60px; padding-top: 48px;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+}
+.trusted-label { font-size: 13px; color: rgba(255,255,255,0.45); font-weight: 600; letter-spacing: 1px; }
+.stars-row { color: #FFD700; font-size: 18px; letter-spacing: 4px; }
+.trusted-text { font-size: 13px; color: rgba(255,255,255,0.35); }
+
+.hero-stats {
+  display: flex; justify-content: center; gap: 48px;
+  margin-top: 32px; padding-top: 32px;
+  border-top: 1px solid rgba(255,255,255,0.08); flex-wrap: wrap;
+}
+.stat-item { text-align: center; }
+.stat-number { font-size: 32px; font-weight: 800; color: var(--teal); display: block; letter-spacing: -1px; }
+.stat-label { font-size: 13px; color: rgba(255,255,255,0.45); margin-top: 4px; font-weight: 500; }
+
+/* REVENUE ALERT */
+.revenue-alert {
+  background: var(--navy-deep);
+  padding: 80px 60px; text-align: center;
+}
+.revenue-alert h2 {
+  font-size: clamp(24px,3.5vw,36px); font-weight: 800; color: var(--white);
+  margin-bottom: 14px; letter-spacing: -0.5px; line-height: 1.2;
+}
+.revenue-alert > p {
+  font-size: 16px; color: rgba(255,255,255,0.5);
+  max-width: 520px; margin: 0 auto 48px; line-height: 1.7;
+}
+.revenue-stats {
+  display: flex; justify-content: center; gap: 48px; flex-wrap: wrap; margin-bottom: 48px;
+}
+.revenue-stat { text-align: center; }
+.revenue-stat-number { font-size: 44px; font-weight: 800; color: var(--teal); display: block; letter-spacing: -2px; }
+.revenue-stat-label { font-size: 14px; color: rgba(255,255,255,0.5); margin-top: 6px; }
+
+/* ZEN DEMO */
+.ai-demo {
+  background: var(--navy); padding: 80px 60px; text-align: center;
+}
+.ai-demo-label {
+  font-size: 11px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase;
+  color: var(--teal); margin-bottom: 16px;
+}
+.ai-demo h2 {
+  font-size: clamp(24px,3.5vw,36px); font-weight: 800; color: var(--white);
+  max-width: 640px; margin: 0 auto 14px; letter-spacing: -0.5px; line-height: 1.2;
+}
+.ai-demo-sub {
+  font-size: 16px; color: rgba(255,255,255,0.45); max-width: 480px; margin: 0 auto 48px; line-height: 1.7;
+}
+.voice-agent-card {
+  max-width: 480px; margin: 0 auto;
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(0,200,150,0.2);
+  border-radius: 20px; padding: 36px 32px;
+}
+.voice-agent-header {
+  display: flex; align-items: center; gap: 16px; margin-bottom: 24px;
+}
+.voice-avatar {
+  width: 56px; height: 56px; background: rgba(0,200,150,0.15);
+  border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px;
+}
+.voice-info h3 { font-size: 16px; font-weight: 700; color: var(--white); }
+.voice-info p { font-size: 13px; color: rgba(255,255,255,0.4); margin-top: 2px; }
+.retell-orb-wrap {
+  display: flex; flex-direction: column; align-items: center; gap: 16px;
+  padding: 24px 0 8px;
+}
+.retell-orb-wrap iframe { border-radius: 50%; overflow: hidden; }
+.play-hint { font-size: 12px; color: rgba(255,255,255,0.3); margin-top: 8px; }
+
+/* LOGOS TICKER */
+.logos-section {
+  background: var(--page-green);
+  border-top: 1px solid var(--teal-border);
+  border-bottom: 1px solid var(--teal-border);
+  padding: 28px 0; overflow: hidden;
+}
+.logos-label-row {
+  text-align: center; font-size: 11px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--text-muted); margin-bottom: 20px;
+}
+.ticker-wrapper { overflow: hidden; position: relative; }
+.ticker-wrapper::before, .ticker-wrapper::after {
+  content: ''; position: absolute; top: 0; bottom: 0; width: 80px; z-index: 2; pointer-events: none;
+}
+.ticker-wrapper::before { left: 0; background: linear-gradient(to right, var(--page-green), transparent); }
+.ticker-wrapper::after { right: 0; background: linear-gradient(to left, var(--page-green), transparent); }
+
+.ticker-track {
+  display: flex; gap: 0; width: max-content;
+  animation: ticker 40s linear infinite;
+}
+.ticker-track:hover { animation-play-state: paused; }
+@keyframes ticker { 0%{ transform: translateX(0) } 100%{ transform: translateX(-50%) } }
+
+.ticker-item {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 8px 28px; flex-shrink: 0;
+  filter: grayscale(1) opacity(0.55);
+  transition: filter .2s;
+}
+.ticker-item:hover { filter: grayscale(0) opacity(1); }
+.ticker-logo {
+  width: 28px; height: 28px; border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 800; color: var(--white); flex-shrink: 0;
+}
+.ticker-name { font-size: 13px; font-weight: 700; color: var(--navy); white-space: nowrap; }
+
+/* SERVICES */
+.services { background: var(--white); padding: 90px 60px; }
+.section-inner { max-width: 1200px; margin: 0 auto; }
+.section-label {
+  font-size: 11px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase;
+  color: var(--teal); text-align: center; margin-bottom: 14px;
+}
+.section-title {
+  font-size: clamp(26px,3.5vw,34px); font-weight: 800; color: var(--navy);
+  text-align: center; letter-spacing: -0.5px; margin-bottom: 12px; line-height: 1.2;
+}
+.section-sub {
+  font-size: 16px; color: var(--text-muted);
+  text-align: center; line-height: 1.7; max-width: 540px; margin: 0 auto 56px;
+}
+.cards-grid {
+  display: grid; grid-template-columns: repeat(2,1fr); gap: 24px;
+  max-width: 980px; margin: 0 auto;
+}
+.card {
+  background: var(--white); border: 1px solid var(--teal-border);
+  border-radius: 16px; padding: 32px 28px;
+  transition: box-shadow .25s, border-color .25s, transform .2s;
+  position: relative; overflow: hidden;
+}
+.card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--cta-grad); opacity: 0; transition: opacity .25s;
+}
+.card:hover { box-shadow: 0 12px 48px rgba(0,200,150,.12); border-color: rgba(0,200,150,.3); transform: translateY(-3px); }
+.card:hover::before { opacity: 1; }
+.card-header { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px; }
+.card-icon {
+  width: 50px; height: 50px; background: var(--pale-teal); border-radius: 12px;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 22px;
+}
+.card-top h3 { font-size: 17px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+.card-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.tag {
+  font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+  color: var(--green-dark); background: var(--pale-teal); padding: 3px 10px; border-radius: 99px;
+}
+.tag-addon { background: #fef3c7; color: #92400e; }
+.card-body { font-size: 14px; color: var(--text-muted); line-height: 1.75; margin-bottom: 18px; }
+.card-bullets { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.card-bullets li {
+  font-size: 13px; color: #3A6070; line-height: 1.5; padding-left: 22px; position: relative;
+}
+.card-bullets li::before { content: '✓'; position: absolute; left: 0; color: var(--teal); font-weight: 700; }
+
+/* ADD-ON CARDS */
+.addon-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 24px; max-width: 980px; margin: 32px auto 0; }
+.addon-card {
+  background: var(--page-green); border: 1px dashed var(--teal-dark);
+  border-radius: 16px; padding: 28px; position: relative;
+}
+.addon-badge {
+  display: inline-block; font-size: 9px; font-weight: 700; letter-spacing: 1.5px;
+  text-transform: uppercase; background: var(--teal); color: var(--navy-deep);
+  padding: 3px 10px; border-radius: 99px; margin-bottom: 14px;
+}
+.addon-card h3 { font-size: 16px; font-weight: 800; color: var(--navy); margin-bottom: 10px; }
+.addon-card p { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+
+/* FEATURE STRIP */
+.features-strip { background: var(--navy); padding: 60px; }
+.features-strip-inner {
+  max-width: 1000px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(4,1fr); gap: 32px;
+}
+.feature-item { text-align: center; }
+.feature-icon { font-size: 28px; margin-bottom: 12px; display: block; }
+.feature-item h4 { font-size: 14px; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+.feature-item p { font-size: 12.5px; color: rgba(255,255,255,0.4); line-height: 1.6; }
+
+/* HOW IT WORKS */
+.how-it-works { background: var(--page-green); padding: 90px 60px; }
+.steps-grid {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 40px;
+  max-width: 860px; margin: 0 auto; position: relative;
+}
+.steps-grid::before {
+  content: ''; position: absolute;
+  top: 26px; left: calc(16.66% + 10px);
+  width: calc(66.66% - 20px); height: 2px;
+  background: linear-gradient(90deg, var(--teal-border), var(--teal), var(--teal-border)); z-index: 0;
+}
+.step { text-align: center; position: relative; z-index: 1; }
+.step-circle {
+  width: 52px; height: 52px; border-radius: 50%;
+  background: var(--navy); color: var(--teal);
+  font-size: 18px; font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 20px; border: 3px solid var(--teal-border); z-index: 2; position: relative;
+}
+.step h3 { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 10px; }
+.step p { font-size: 13.5px; color: var(--text-muted); line-height: 1.6; }
+
+/* ZEN WORKS */
+.zen-works { background: var(--white); padding: 90px 60px; }
+.zen-steps {
+  display: grid; grid-template-columns: repeat(4,1fr); gap: 32px;
+  max-width: 1000px; margin: 0 auto; position: relative;
+}
+.zen-steps::before {
+  content: ''; position: absolute; top: 24px; left: 12.5%; width: 75%; height: 2px;
+  background: linear-gradient(90deg, var(--teal-border), var(--teal), var(--teal-border));
+}
+.zen-step { text-align: center; position: relative; z-index: 1; }
+.zen-step-number {
+  width: 48px; height: 48px; border-radius: 50%;
+  background: var(--teal); color: var(--navy-deep);
+  font-size: 16px; font-weight: 800;
+  display: flex; align-items: center; justify-content: center; margin: 0 auto 18px;
+}
+.zen-step h4 { font-size: 14px; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
+.zen-step p { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+
+/* INDUSTRY SELECTOR */
+.industry-selector { background: var(--page-green); padding: 90px 60px; }
+.industry-inner { max-width: 740px; margin: 0 auto; }
+.industry-tabs {
+  display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 40px;
+}
+.industry-tab {
+  font-family: var(--font); font-size: 13px; font-weight: 600;
+  padding: 8px 18px; border-radius: 99px; border: 1px solid var(--teal-border);
+  background: var(--white); color: var(--text-muted); cursor: pointer; transition: all .2s;
+}
+.industry-tab.active, .industry-tab:hover {
+  background: var(--teal); color: var(--navy-deep); border-color: var(--teal);
+}
+.industry-form {
+  background: var(--white); border: 1px solid var(--teal-border);
+  border-radius: 20px; padding: 40px;
+}
+.industry-form h3 { font-size: 22px; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
+.selected-industry { font-size: 13px; color: var(--teal); font-weight: 600; margin-bottom: 28px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+.form-group label { font-size: 13px; font-weight: 600; color: var(--navy); }
+.form-group label span { color: #e53e3e; }
+.form-group input {
+  font-family: var(--font); font-size: 14px; padding: 12px 16px;
+  border: 1px solid var(--teal-border); border-radius: 8px; outline: none;
+  transition: border-color .2s;
+}
+.form-group input:focus { border-color: var(--teal); }
+.form-submit {
+  width: 100%; font-family: var(--font); font-size: 15px; font-weight: 700;
+  background: var(--teal); color: var(--navy-deep); border: none; cursor: pointer;
+  padding: 15px; border-radius: 8px; transition: opacity .2s, transform .15s; margin-top: 8px;
+}
+.form-submit:hover { opacity: .88; transform: translateY(-1px); }
+.form-disclaimer { font-size: 12px; color: var(--text-muted); text-align: center; margin-top: 12px; }
+
+/* TESTIMONIALS */
+.results { background: var(--white); padding: 90px 60px; }
+.testimonials-grid {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; max-width: 1000px; margin: 0 auto 48px;
+}
+.testimonial-card {
+  background: var(--white); border: 1px solid var(--teal-border);
+  border-radius: 16px; padding: 28px; transition: transform .2s;
+}
+.testimonial-card:hover { transform: translateY(-3px); box-shadow: 0 12px 36px rgba(0,200,150,.08); }
+.stars { color: var(--teal); font-size: 14px; margin-bottom: 14px; letter-spacing: 2px; }
+.testimonial-quote {
+  font-size: 14px; color: var(--navy); line-height: 1.7; font-weight: 500;
+  margin-bottom: 20px; font-style: italic;
+}
+.testimonial-author { display: flex; align-items: center; gap: 12px; }
+.author-avatar {
+  width: 40px; height: 40px; border-radius: 50%; background: var(--pale-teal);
+  display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700;
+  color: var(--green-dark); flex-shrink: 0;
+}
+.author-name { font-size: 13px; font-weight: 700; color: var(--navy); display: block; }
+.author-role { font-size: 12px; color: var(--text-muted); }
+
+.rotating-testimonials { max-width: 680px; margin: 0 auto 56px; }
+.rotating-card {
+  display: none; background: var(--page-green); border: 1px solid var(--teal-border);
+  border-radius: 16px; padding: 36px;
+}
+.rotating-card.active { display: block; }
+.rotating-card .testimonial-author .author-avatar {
+  background: var(--teal); color: var(--navy-deep); font-weight: 800;
+}
+.rotating-dots { display: flex; gap: 8px; justify-content: center; margin-top: 20px; }
+.rotating-dot {
+  width: 8px; height: 8px; border-radius: 50%; background: var(--teal-border);
+  cursor: pointer; transition: background .2s;
+}
+.rotating-dot.active { background: var(--teal); }
+
+.results-metrics {
+  display: grid; grid-template-columns: repeat(4,1fr); gap: 24px;
+  max-width: 1000px; margin: 0 auto; text-align: center;
+}
+.metric-card {
+  background: var(--page-green); border: 1px solid var(--teal-border);
+  border-radius: 12px; padding: 28px 20px;
+}
+.metric-number { font-size: 36px; font-weight: 800; color: var(--teal); letter-spacing: -1px; display: block; margin-bottom: 8px; }
+.metric-label { font-size: 13px; color: var(--text-muted); line-height: 1.4; }
+
+/* ROI CALCULATOR */
+.roi-calculator { background: var(--page-green); padding: 90px 60px; }
+.roi-header { text-align: center; margin-bottom: 56px; }
+.roi-container { max-width: 860px; margin: 0 auto; }
+.roi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+.roi-inputs, .roi-results {
+  background: var(--white); border: 1px solid var(--teal-border);
+  border-radius: 16px; padding: 32px;
+}
+.roi-inputs h3, .roi-results h3 {
+  font-size: 16px; font-weight: 800; color: var(--navy); margin-bottom: 24px;
+}
+.roi-field { margin-bottom: 24px; }
+.roi-field label { font-size: 13px; font-weight: 600; color: var(--navy); display: block; margin-bottom: 10px; }
+.roi-field input[type=range] {
+  width: 100%; -webkit-appearance: none; height: 4px;
+  background: var(--teal-border); border-radius: 2px; outline: none;
+}
+.roi-field input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%;
+  background: var(--teal); cursor: pointer;
+}
+.roi-value {
+  display: flex; justify-content: space-between; font-size: 12px;
+  color: var(--text-muted); margin-top: 6px;
+}
+.roi-value .current { font-weight: 700; color: var(--teal); font-size: 14px; }
+.roi-result-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.roi-result-label { font-size: 13px; color: var(--text-muted); }
+.roi-result-value { font-size: 22px; font-weight: 800; color: var(--navy); }
+.roi-result-value.large { font-size: 32px; }
+.roi-result-value.highlight { color: var(--teal); }
+.roi-yearly {
+  background: var(--navy); border-radius: 12px; padding: 20px;
+  text-align: center; margin-top: 24px;
+}
+.roi-yearly-label { font-size: 12px; color: rgba(255,255,255,0.5); margin-bottom: 6px; }
+.roi-yearly-value { font-size: 36px; font-weight: 800; color: var(--teal); letter-spacing: -1px; }
+
+/* ABOUT */
+.about { background: var(--white); padding: 90px 60px; }
+.about-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 60px; max-width: 1000px; margin: 0 auto; align-items: start; }
+.about-text h3 { font-size: 17px; font-weight: 800; color: var(--navy); margin-bottom: 12px; }
+.about-text p { font-size: 14px; color: var(--text-muted); line-height: 1.75; margin-bottom: 16px; }
+.about-values { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 28px; }
+.about-value { background: var(--page-green); border: 1px solid var(--teal-border); border-radius: 12px; padding: 18px; }
+.about-value h4 { font-size: 13px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+.about-value p { font-size: 12.5px; color: var(--text-muted); line-height: 1.6; }
+.about-founder { background: var(--navy); border-radius: 20px; padding: 32px; }
+.founder-header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+.founder-avatar {
+  width: 52px; height: 52px; border-radius: 50%;
+  background: var(--teal); color: var(--navy-deep);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; font-weight: 800;
+}
+.founder-info h4 { font-size: 16px; font-weight: 800; color: var(--white); }
+.founder-info p { font-size: 13px; color: rgba(255,255,255,0.45); }
+.founder-quote { font-size: 14px; color: rgba(255,255,255,0.65); line-height: 1.7; font-style: italic; }
+
+/* MAP */
+.map-section { height: 300px; position: relative; overflow: hidden; }
+.map-section iframe { width: 100%; height: 100%; border: none; }
+.map-overlay {
+  position: absolute; bottom: 20px; left: 20px;
+  background: var(--navy); border: 1px solid rgba(0,200,150,0.2);
+  border-radius: 12px; padding: 16px 20px;
+}
+.map-overlay h4 { font-size: 14px; font-weight: 700; color: var(--white); margin-bottom: 6px; }
+.map-overlay p { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.8; }
+
+/* FAQ */
+.faq { background: var(--page-green); padding: 90px 60px; }
+.faq-container { max-width: 720px; margin: 0 auto; }
+.faq-item { border-bottom: 1px solid var(--teal-border); }
+.faq-question {
+  font-size: 15px; font-weight: 700; color: var(--navy);
+  padding: 20px 0; cursor: pointer;
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  transition: color .2s;
+}
+.faq-question:hover { color: var(--teal); }
+.faq-question::after {
+  content: '+'; font-size: 20px; font-weight: 300; color: var(--teal);
+  flex-shrink: 0; transition: transform .3s;
+}
+.faq-item.open .faq-question::after { transform: rotate(45deg); }
+.faq-answer {
+  max-height: 0; overflow: hidden; transition: max-height .4s ease, padding .3s;
+}
+.faq-item.open .faq-answer { max-height: 300px; padding-bottom: 20px; }
+.faq-answer p { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+
+/* CTA BANNER */
+.cta-banner {
+  background: var(--cta-grad); padding: 90px 60px; text-align: center;
+}
+.cta-banner h2 {
+  font-size: clamp(24px,3.5vw,36px); font-weight: 800; color: var(--navy);
+  max-width: 680px; margin: 0 auto 16px; letter-spacing: -0.5px; line-height: 1.2;
+}
+.cta-banner p { font-size: 16px; color: rgba(0,0,0,0.55); max-width: 500px; margin: 0 auto 36px; line-height: 1.7; }
+.btn-dark {
+  font-family: var(--font); font-size: 15px; font-weight: 700;
+  background: var(--navy); color: var(--teal); border: none; cursor: pointer;
+  padding: 16px 36px; border-radius: 8px; text-decoration: none; display: inline-block;
+  transition: opacity .2s, transform .15s;
+}
+.btn-dark:hover { opacity: .88; transform: translateY(-2px); }
+
+/* FOOTER */
+footer { background: var(--navy); padding: 48px 60px 32px; }
+.footer-top {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  gap: 48px; margin-bottom: 48px; flex-wrap: wrap;
+}
+.footer-brand p { font-size: 13px; color: rgba(255,255,255,0.40); max-width: 240px; line-height: 1.7; margin-top: 14px; }
+.footer-contact-info { margin-top: 16px; }
+.footer-contact-info p { margin-bottom: 6px; }
+.footer-contact-info a { color: var(--teal); text-decoration: none; }
+.footer-cols { display: flex; gap: 56px; flex-wrap: wrap; }
+.footer-col h4 {
+  font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--teal); margin-bottom: 16px;
+}
+.footer-col a {
+  display: block; font-size: 13px; color: rgba(255,255,255,0.45);
+  text-decoration: none; margin-bottom: 10px; transition: color .15s;
+}
+.footer-col a:hover { color: var(--white); }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 12px;
+}
+.footer-bottom p { font-size: 13px; color: rgba(255,255,255,0.35); }
+.footer-bottom-links { display: flex; gap: 24px; }
+.footer-bottom-links a { font-size: 13px; color: rgba(255,255,255,0.35); text-decoration: none; transition: color .15s; }
+.footer-bottom-links a:hover { color: rgba(255,255,255,0.7); }
+
+/* SCROLL TOP */
+.scroll-top {
+  position: fixed; bottom: 90px; right: 24px; z-index: 999;
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--teal); color: var(--navy-deep);
+  border: none; cursor: pointer; font-size: 18px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none; transition: opacity .3s, transform .2s;
+  box-shadow: 0 4px 20px rgba(0,200,150,0.4);
+}
+.scroll-top.visible { opacity: 1; pointer-events: all; }
+.scroll-top:hover { transform: translateY(-2px); }
+
+/* STICKY MOBILE CTA */
+.sticky-mobile-cta {
+  display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 998;
+  padding: 12px 16px; background: var(--navy);
+  border-top: 1px solid rgba(0,200,150,0.2);
+}
+.sticky-mobile-cta a {
+  display: block; text-align: center; font-family: var(--font);
+  font-size: 15px; font-weight: 700; background: var(--teal);
+  color: var(--navy-deep); padding: 14px; border-radius: 8px; text-decoration: none;
+}
+
+/* REVEAL ANIMATION */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity .6s, transform .6s; }
+.reveal.visible { opacity: 1; transform: none; }
+
+@keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+.hero-badge { animation: fadeUp .6s ease both; }
+.hero h1 { animation: fadeUp .6s .1s ease both; }
+.hero-sub { animation: fadeUp .6s .2s ease both; }
+.hero-btns { animation: fadeUp .6s .3s ease both; }
+.trusted-bar, .hero-stats { animation: fadeUp .6s .4s ease both; }
+
+/* MOBILE */
+@media (max-width: 768px) {
+  nav { padding: 0 20px; }
+  .nav-center, .nav-right { display: none; }
+  .hamburger { display: flex; }
+  .hero { padding: 60px 20px 80px; }
+  .hero h1 { font-size: 30px; }
+  .hero-stats { gap: 24px; }
+  .revenue-alert, .ai-demo, .services, .how-it-works, .zen-works,
+  .industry-selector, .results, .roi-calculator, .about, .faq, .cta-banner { padding: 60px 20px; }
+  .cards-grid, .addon-grid, .testimonials-grid { grid-template-columns: 1fr; }
+  .steps-grid, .zen-steps { grid-template-columns: 1fr; gap: 28px; }
+  .steps-grid::before, .zen-steps::before { display: none; }
+  .features-strip { padding: 48px 20px; }
+  .features-strip-inner { grid-template-columns: repeat(2,1fr); }
+  .results-metrics { grid-template-columns: repeat(2,1fr); }
+  .roi-grid { grid-template-columns: 1fr; }
+  .about-grid { grid-template-columns: 1fr; }
+  .about-values { grid-template-columns: 1fr; }
+  .footer-top { flex-direction: column; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+  footer { padding: 40px 20px 24px; }
+  .form-row { grid-template-columns: 1fr; }
+  .revenue-stats { gap: 28px; }
+  .sticky-mobile-cta { display: block; }
+  .scroll-top { bottom: 80px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ANNOUNCEMENT BAR -->
+<div class="announce-bar">
+  <span class="stars">★★★★★</span>
+  <span>Trusted by 22+ Companies Worldwide · <a href="mailto:hello@zenvaio.com">Book a Free Strategy Call →</a></span>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <!-- ZV Logo SVG -->
+    <svg class="nav-logo-svg" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="40" height="40" rx="8" fill="#00C896"/>
+      <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle"
+        font-family="'Plus Jakarta Sans', Arial, sans-serif"
+        font-size="16" font-weight="800" fill="#0D1F2D">ZV</text>
+    </svg>
+    <span class="nav-logo-text">ZEN<span>V</span>AIO</span>
+  </a>
+
+  <ul class="nav-center">
+    <li>
+      <button>Services <span class="chevron"></span></button>
+      <div class="dropdown">
+        <a href="#services"><span class="dd-icon">🤖</span><span class="dd-text"><strong>AI Front Desk</strong><span>24/7 AI voice &amp; chat agent</span></span></a>
+        <a href="#services"><span class="dd-icon">⚡</span><span class="dd-text"><strong>Instant Lead Response</strong><span>Contact leads within 60 seconds</span></span></a>
+        <a href="#services"><span class="dd-icon">📅</span><span class="dd-text"><strong>Appointment Booking</strong><span>End-to-end scheduling automation</span></span></a>
+        <a href="#services"><span class="dd-icon">🔄</span><span class="dd-text"><strong>Client Reactivation</strong><span>Re-engage dormant clients automatically</span></span></a>
+      </div>
+    </li>
+    <li>
+      <button>How It Works <span class="chevron"></span></button>
+      <div class="dropdown">
+        <a href="#how-it-works"><span class="dd-icon">📞</span><span class="dd-text"><strong>Strategy Call</strong><span>Map your current flow &amp; gaps</span></span></a>
+        <a href="#how-it-works"><span class="dd-icon">🔧</span><span class="dd-text"><strong>We Build &amp; Test</strong><span>Full system configured in 14 days</span></span></a>
+        <a href="#how-it-works"><span class="dd-icon">🚀</span><span class="dd-text"><strong>Go Live &amp; Scale</strong><span>Monitor, optimise &amp; grow</span></span></a>
+      </div>
+    </li>
+    <li><a href="#results">Results</a></li>
+    <li><a href="#roi-calculator">ROI Calc</a></li>
+    <li><a href="mailto:hello@zenvaio.com">Contact</a></li>
+  </ul>
+
+  <div class="nav-right">
+    <a href="mailto:hello@zenvaio.com" class="btn-nav">Book a Free Strategy Call</a>
+  </div>
+  <button class="hamburger" aria-label="Menu" onclick="document.querySelector('.nav-center').style.display='flex'">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">Done-for-you AI Automation Systems</div>
+  <h1>Grow Your Business Without<br><span class="accent">Growing Your Workload.</span></h1>
+  <p class="hero-sub">Zenvaio designs and manages AI-powered automation systems tailored to your business — so every lead gets a response, every appointment gets booked, and you can focus on the work you love.</p>
+  <div class="hero-btns">
+    <a href="mailto:hello@zenvaio.com" class="btn-primary">Book a Free Strategy Call</a>
+    <a href="#how-it-works" class="btn-secondary">See How It Works</a>
+  </div>
+  <div class="trusted-bar">
+    <span class="trusted-label">Trusted by 22+ Companies Worldwide</span>
+    <div class="stars-row">★★★★★</div>
+    <span class="trusted-text">Five-Star Rated on Every Platform</span>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-item"><span class="stat-number">60s</span><span class="stat-label">Lead Response Time</span></div>
+    <div class="stat-item"><span class="stat-number">14</span><span class="stat-label">Days to Go Live</span></div>
+    <div class="stat-item"><span class="stat-number">24/7</span><span class="stat-label">AI Coverage</span></div>
+    <div class="stat-item"><span class="stat-number">10–25%</span><span class="stat-label">Lapsed Clients Recovered</span></div>
+  </div>
+</section>
+
+<!-- REVENUE ALERT -->
+<section class="revenue-alert">
+  <div class="section-inner">
+    <p class="section-label" style="color:var(--teal)">Revenue Alert</p>
+    <h2>How Much Revenue Are You Missing?</h2>
+    <p>Most businesses lose 67% of potential sales to slow response times and missed calls. See how much you're leaving on the table.</p>
+    <div class="revenue-stats">
+      <div class="revenue-stat"><span class="revenue-stat-number">62%</span><span class="revenue-stat-label">of calls to SMEs go unanswered</span></div>
+      <div class="revenue-stat"><span class="revenue-stat-number">47h</span><span class="revenue-stat-label">average lead response time</span></div>
+      <div class="revenue-stat"><span class="revenue-stat-number">67%</span><span class="revenue-stat-label">of potential sales lost to delays</span></div>
+    </div>
+    <a href="#roi-calculator" class="btn-primary">Show Me My Lost Revenue</a>
+  </div>
+</section>
+
+<!-- ZEN VOICE DEMO -->
+<section class="ai-demo">
+  <p class="ai-demo-label">Experience Zenvaio Intelligence</p>
+  <h2>No Robotic Voices. Just Pure, Human-Like Sales Intelligence.</h2>
+  <p class="ai-demo-sub">Meet Zen — the Zenvaio Agent. Ready to engage your leads with natural, human-like conversations 24/7.</p>
+  <div class="voice-agent-card">
+    <div class="voice-agent-header">
+      <div class="voice-avatar">🎙️</div>
+      <div class="voice-info">
+        <h3>Zen — Zenvaio Agent</h3>
+        <p>Voice: Sloane · Powered by Retell AI</p>
+      </div>
+    </div>
+    <div class="retell-orb-wrap">
+      <iframe
+        src="https://agent.retellai.com/orb/agent_31af81666a9b52deb6af77467c?token=b1f83175a08dd1600051d56da497d45d"
+        allow="microphone"
+        style="border: none; width: 120px; height: 120px;">
+      </iframe>
+      <p class="play-hint">Tap the orb to speak with Zen · Best on Chrome or Safari · Volume on</p>
+    </div>
+  </div>
+</section>
+
+<!-- LOGOS TICKER -->
+<div class="logos-section">
+  <div class="logos-label-row">Powered By &amp; Integrates With</div>
+  <div class="ticker-wrapper">
+    <div class="ticker-track" id="ticker">
+      <!-- Row 1 (duplicated for seamless loop) -->
+      <div class="ticker-item"><div class="ticker-logo" style="background:#FF7A59">HS</div><span class="ticker-name">HubSpot</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#00A1E0">SF</div><span class="ticker-name">Salesforce</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#E42527">ZH</div><span class="ticker-name">Zoho CRM</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#017737">PD</div><span class="ticker-name">Pipedrive</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#F87100">GH</div><span class="ticker-name">GoHighLevel</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#F62B54">MD</div><span class="ticker-name">Monday.com</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#4285F4">GC</div><span class="ticker-name">Google Calendar</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#0072C6">OL</div><span class="ticker-name">Outlook</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#006BFF">CL</div><span class="ticker-name">Calendly</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#007AFF">CA</div><span class="ticker-name">Cal.com</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#0B3956">AQ</div><span class="ticker-name">Acuity</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#F22F46">TW</div><span class="ticker-name">Twilio</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#25D366">WA</div><span class="ticker-name">WhatsApp</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#4A154B">SL</div><span class="ticker-name">Slack</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#EA4335">GM</div><span class="ticker-name">Gmail</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#0866FF">FM</div><span class="ticker-name">FB Messenger</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#FFE01B;color:#333">MC</div><span class="ticker-name">Mailchimp</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#004D91">AC</div><span class="ticker-name">ActiveCampaign</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#8B5CF6">KV</div><span class="ticker-name">Klaviyo</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#0AA4AE">BR</div><span class="ticker-name">Brevo</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#FB6970">CK</div><span class="ticker-name">ConvertKit</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#0866FF">FB</div><span class="ticker-name">Meta Ads</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#4285F4">GA</div><span class="ticker-name">Google Ads</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#010101;color:#fff">TT</div><span class="ticker-name">TikTok Ads</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#0A66C2">LI</div><span class="ticker-name">LinkedIn</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#262627">TF</div><span class="ticker-name">Typeform</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#FF6100">JF</div><span class="ticker-name">Jotform</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#4285F4">GF</div><span class="ticker-name">Google Forms</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#34A853">GS</div><span class="ticker-name">Google Sheets</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#FFB700;color:#333">AT</div><span class="ticker-name">Airtable</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#000;color:#fff">NO</div><span class="ticker-name">Notion</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#0078D4">M3</div><span class="ticker-name">Microsoft 365</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#635BFF">ST</div><span class="ticker-name">Stripe</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#3E4348">SQ</div><span class="ticker-name">Square</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#003087">PP</div><span class="ticker-name">PayPal</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#000;color:#fff">AI</div><span class="ticker-name">OpenAI</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#00C896">RA</div><span class="ticker-name">Retell AI</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#21759B">WP</div><span class="ticker-name">WordPress</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#4353FF">WF</div><span class="ticker-name">Webflow</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#0C6EFC">WX</div><span class="ticker-name">Wix</span></div>
+      <!-- Duplicate for seamless loop -->
+      <div class="ticker-item"><div class="ticker-logo" style="background:#FF7A59">HS</div><span class="ticker-name">HubSpot</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#00A1E0">SF</div><span class="ticker-name">Salesforce</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#E42527">ZH</div><span class="ticker-name">Zoho CRM</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#017737">PD</div><span class="ticker-name">Pipedrive</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#F87100">GH</div><span class="ticker-name">GoHighLevel</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#F62B54">MD</div><span class="ticker-name">Monday.com</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#4285F4">GC</div><span class="ticker-name">Google Calendar</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#0072C6">OL</div><span class="ticker-name">Outlook</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#006BFF">CL</div><span class="ticker-name">Calendly</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#007AFF">CA</div><span class="ticker-name">Cal.com</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#0B3956">AQ</div><span class="ticker-name">Acuity</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#F22F46">TW</div><span class="ticker-name">Twilio</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#25D366">WA</div><span class="ticker-name">WhatsApp</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#4A154B">SL</div><span class="ticker-name">Slack</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#EA4335">GM</div><span class="ticker-name">Gmail</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#0866FF">FM</div><span class="ticker-name">FB Messenger</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#FFE01B;color:#333">MC</div><span class="ticker-name">Mailchimp</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#004D91">AC</div><span class="ticker-name">ActiveCampaign</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#8B5CF6">KV</div><span class="ticker-name">Klaviyo</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#0AA4AE">BR</div><span class="ticker-name">Brevo</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#FB6970">CK</div><span class="ticker-name">ConvertKit</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#0866FF">FB</div><span class="ticker-name">Meta Ads</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#4285F4">GA</div><span class="ticker-name">Google Ads</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#010101;color:#fff">TT</div><span class="ticker-name">TikTok Ads</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#0A66C2">LI</div><span class="ticker-name">LinkedIn</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#262627">TF</div><span class="ticker-name">Typeform</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#FF6100">JF</div><span class="ticker-name">Jotform</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#4285F4">GF</div><span class="ticker-name">Google Forms</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#34A853">GS</div><span class="ticker-name">Google Sheets</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#FFB700;color:#333">AT</div><span class="ticker-name">Airtable</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#000;color:#fff">NO</div><span class="ticker-name">Notion</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#0078D4">M3</div><span class="ticker-name">Microsoft 365</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#635BFF">ST</div><span class="ticker-name">Stripe</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#3E4348">SQ</div><span class="ticker-name">Square</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#003087">PP</div><span class="ticker-name">PayPal</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#000;color:#fff">AI</div><span class="ticker-name">OpenAI</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#00C896">RA</div><span class="ticker-name">Retell AI</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#21759B">WP</div><span class="ticker-name">WordPress</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#4353FF">WF</div><span class="ticker-name">Webflow</span></div>
+      <div class="ticker-item"><div class="ticker-logo" style="background:#0C6EFC">WX</div><span class="ticker-name">Wix</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-inner">
+    <p class="section-label reveal">Our Services</p>
+    <h2 class="section-title reveal">Four Systems. Zero Manual Work.</h2>
+    <p class="section-sub reveal">Every system is built, tested, and managed by Zenvaio — you just show up to the calls.</p>
+    <div class="cards-grid">
+      <div class="card reveal">
+        <div class="card-header"><div class="card-icon">🤖</div><div class="card-top"><h3>AI Front Desk</h3><div class="card-tags"><span class="tag">Starter</span><span class="tag">Growth</span><span class="tag">Full Stack</span></div></div></div>
+        <p class="card-body">Replaces your front desk with a 24/7 AI voice and chat agent that answers calls, handles FAQs, qualifies leads, and logs everything to your CRM automatically.</p>
+        <ul class="card-bullets"><li>Custom AI voice agent (branded persona)</li><li>Handles inbound calls after hours &amp; peak times</li><li>AI chat widget for your website</li><li>Every call logged to CRM with transcript</li><li>Instant SMS/email alert to business owner</li></ul>
+      </div>
+      <div class="card reveal">
+        <div class="card-header"><div class="card-icon">⚡</div><div class="card-top"><h3>Instant Lead Response</h3><div class="card-tags"><span class="tag">Growth</span><span class="tag">Full Stack</span></div></div></div>
+        <p class="card-body">Every new lead — from ads, forms, or missed calls — is contacted within 60 seconds via SMS and AI voice call. Eliminates lead decay and beats your competition.</p>
+        <ul class="card-bullets"><li>Connects to Facebook Ads, Google Ads, forms</li><li>Personalised SMS within 60 seconds of entry</li><li>Outbound AI voice call if no response in 5 min</li><li>5-email nurture sequence triggered automatically</li><li>Hot lead scoring &amp; instant sales owner alert</li></ul>
+      </div>
+      <div class="card reveal">
+        <div class="card-header"><div class="card-icon">📅</div><div class="card-top"><h3>Appointment Booking Automation</h3><div class="card-tags"><span class="tag">Starter</span><span class="tag">Growth</span><span class="tag">Full Stack</span></div></div></div>
+        <p class="card-body">End-to-end automation of your entire scheduling process — from first contact to confirmed booking, reminders, no-show recovery, and post-appointment follow-up.</p>
+        <ul class="card-bullets"><li>AI booking agent via voice or chat</li><li>Automated reminders at 48hr &amp; 2hr before</li><li>No-show recovery SMS with one-tap reschedule</li><li>Post-appointment review request (Google)</li><li>Syncs with Google Calendar &amp; Outlook</li></ul>
+      </div>
+      <div class="card reveal">
+        <div class="card-header"><div class="card-icon">🔄</div><div class="card-top"><h3>Dormant Client Reactivation</h3><div class="card-tags"><span class="tag">Full Stack</span><span class="tag tag-addon">Add-on</span></div></div></div>
+        <p class="card-body">Automatically re-engages past clients who have gone quiet — turning cold contacts into active revenue. Typically recovers 10–25% of lapsed clients with zero manual outreach.</p>
+        <ul class="card-bullets"><li>Segments client list by recency &amp; spend tier</li><li>Personalised email &amp; SMS reactivation sequences</li><li>Outbound AI voice calls for high-value clients</li><li>Dynamic offer engine (discounts, bonuses)</li><li>Re-entry routing back into your pipeline</li></ul>
+      </div>
+    </div>
+
+    <!-- ADD-ONS -->
+    <div class="addon-grid" style="margin-top:40px">
+      <div class="addon-card reveal">
+        <span class="addon-badge">Available on All Plans</span>
+        <h3>⭐ Google Review Generation</h3>
+        <p>After every completed appointment or service, an automated SMS or email requests a Google review — no manual follow-up needed. Build your reputation on autopilot.</p>
+      </div>
+      <div class="addon-card reveal">
+        <span class="addon-badge">Enterprise &amp; Custom</span>
+        <h3>⚙️ Custom Automations</h3>
+        <p>Need something bespoke? We build fully custom automation workflows tailored to your exact business process — from complex multi-step pipelines to unique CRM integrations.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURE STRIP -->
+<div class="features-strip">
+  <div class="features-strip-inner">
+    <div class="feature-item reveal"><span class="feature-icon">🎯</span><h4>Built for Your Business</h4><p>Every automation is custom-configured to match your industry, workflow, and goals.</p></div>
+    <div class="feature-item reveal"><span class="feature-icon">🔒</span><h4>Fully Managed</h4><p>We monitor, optimise, and maintain your systems — no technical knowledge required.</p></div>
+    <div class="feature-item reveal"><span class="feature-icon">⚙️</span><h4>Seamless Integrations</h4><p>Connects with your existing CRM, calendar, and marketing tools out of the box.</p></div>
+    <div class="feature-item reveal"><span class="feature-icon">📊</span><h4>Measurable ROI</h4><p>Track leads recovered, bookings made, and revenue generated — all in one dashboard.</p></div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="how-it-works" id="how-it-works">
+  <div class="section-inner">
+    <p class="section-label reveal">The Process</p>
+    <h2 class="section-title reveal">Up and Running in 14 Days</h2>
+    <p class="section-sub reveal">We handle the entire build — you don't need to touch a single tool.</p>
+    <div class="steps-grid">
+      <div class="step reveal"><div class="step-circle">01</div><h3>Strategy Call</h3><p>We map your current lead and booking flow, identify the gaps, and design your custom automation system.</p></div>
+      <div class="step reveal"><div class="step-circle">02</div><h3>We Build &amp; Test</h3><p>Zenvaio configures your AI voice agent, CRM integrations, and automation workflows — all fully tested before launch.</p></div>
+      <div class="step reveal"><div class="step-circle">03</div><h3>Go Live &amp; Scale</h3><p>Your system launches. We monitor performance, optimise monthly, and scale as your business grows.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW ZEN WORKS -->
+<section class="zen-works">
+  <div class="section-inner">
+    <p class="section-label reveal">How Zen Works</p>
+    <h2 class="section-title reveal">From Lead Submission to Booked Appointment in Minutes</h2>
+    <p class="section-sub reveal">Not days. Zen handles the entire journey automatically.</p>
+    <div class="zen-steps">
+      <div class="zen-step reveal"><div class="zen-step-number">01</div><h4>Lead Submits</h4><p>A prospect fills out your form, clicks an ad, or enters your funnel. Zen is instantly notified.</p></div>
+      <div class="zen-step reveal"><div class="zen-step-number">02</div><h4>Zen Calls</h4><p>Within 30 seconds, Zen calls your lead with a natural, human-like voice conversation.</p></div>
+      <div class="zen-step reveal"><div class="zen-step-number">03</div><h4>Qualifies Lead</h4><p>Zen asks your custom qualifying questions, handles objections, and gauges interest level.</p></div>
+      <div class="zen-step reveal"><div class="zen-step-number">04</div><h4>Books Appointment</h4><p>Qualified leads are instantly booked into your calendar. You only talk to ready-to-buy prospects.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- INDUSTRY SELECTOR -->
+<section class="industry-selector" id="industry-selector">
+  <div class="section-inner">
+    <p class="section-label reveal">Built for Every Industry</p>
+    <h2 class="section-title reveal">Experience Zen in Action</h2>
+    <p class="section-sub reveal">Select your industry and see how Zen engages leads and books appointments automatically.</p>
+    <div class="industry-inner">
+      <div class="industry-tabs">
+        <button class="industry-tab active" onclick="selectIndustry(this,'Real Estate','Instant lead response for realtors and agencies')">Real Estate</button>
+        <button class="industry-tab" onclick="selectIndustry(this,'Mortgage Lending','Speed-to-lead automation for lenders')">Mortgage Lending</button>
+        <button class="industry-tab" onclick="selectIndustry(this,'Digital Marketing','Agency lead qualification and booking')">Digital Marketing</button>
+        <button class="industry-tab" onclick="selectIndustry(this,'Home Services','24/7 booking for plumbers, HVAC, electricians')">Home Services</button>
+        <button class="industry-tab" onclick="selectIndustry(this,'Pet Services','Grooming &amp; vet appointment automation')">Pet Services</button>
+        <button class="industry-tab" onclick="selectIndustry(this,'Healthcare','Patient booking and after-hours coverage')">Healthcare</button>
+        <button class="industry-tab" onclick="selectIndustry(this,'Legal Services','Consultation booking for law firms')">Legal Services</button>
+        <button class="industry-tab" onclick="selectIndustry(this,'Automotive','Dealership lead response and test drives')">Automotive</button>
+        <button class="industry-tab" onclick="selectIndustry(this,'E-commerce','Cart recovery and customer reactivation')">E-commerce</button>
+      </div>
+      <div class="industry-form">
+        <h3>Get a Call from Zen</h3>
+        <p class="selected-industry" id="selectedIndustry">Selected: Real Estate — Instant lead response for realtors and agencies</p>
+        <div class="form-row">
+          <div class="form-group"><label>First Name <span>*</span></label><input type="text" placeholder="Enter your first name"></div>
+          <div class="form-group"><label>Last Name <span>*</span></label><input type="text" placeholder="Enter your last name"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Phone Number <span>*</span></label><input type="tel" placeholder="Enter your phone number"></div>
+          <div class="form-group"><label>Email Address <span>*</span></label><input type="email" placeholder="Enter your email address"></div>
+        </div>
+        <button class="form-submit" onclick="alert('Thank you! Zen will call you shortly. Make sure your volume is on!')">Get a Call from Zen</button>
+        <p class="form-disclaimer">By submitting, you agree to receive a call from our AI Assistant, Zen.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS / RESULTS -->
+<section class="results" id="results">
+  <div class="section-inner">
+    <p class="section-label reveal">Results</p>
+    <h2 class="section-title reveal">Businesses Growing With Zenvaio</h2>
+    <p class="section-sub reveal">Real outcomes from real business owners who let AI handle the workload.</p>
+
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal"><div class="stars">★★★★★</div><p class="testimonial-quote">"We went from missing half our leads to booking 3x more appointments in the first month. The AI front desk answers calls we couldn't — at 2am, on weekends, all of it."</p><div class="testimonial-author"><div class="author-avatar">👨‍💼</div><div><span class="author-name">Marcus T.</span><span class="author-role">Dental Practice Owner</span></div></div></div>
+      <div class="testimonial-card reveal"><div class="stars">★★★★★</div><p class="testimonial-quote">"The 60-second lead response alone changed everything. We were losing clients to competitors because we called back too late. Not anymore. Worth every penny."</p><div class="testimonial-author"><div class="author-avatar">👩‍💼</div><div><span class="author-name">Sarah K.</span><span class="author-role">Real Estate Agency</span></div></div></div>
+      <div class="testimonial-card reveal"><div class="stars">★★★★★</div><p class="testimonial-quote">"The reactivation campaign brought back 18 clients we thought were gone forever. That's over $24k in recovered revenue in 6 weeks. Zenvaio paid for itself 8x over."</p><div class="testimonial-author"><div class="author-avatar">🧔</div><div><span class="author-name">James O.</span><span class="author-role">Fitness Studio Owner</span></div></div></div>
+    </div>
+
+    <div class="rotating-testimonials">
+      <div class="rotating-card active"><div class="stars">★★★★★</div><p class="testimonial-quote">"Zen transformed our lead response time. We went from 47 hours to under 30 seconds. Our conversion rate doubled in the first month!"</p><div class="testimonial-author"><div class="author-avatar">MT</div><div><span class="author-name">Michael Thompson</span><span class="author-role">Real Estate Broker — Chicago, IL</span></div></div></div>
+      <div class="rotating-card"><div class="stars">★★★★★</div><p class="testimonial-quote">"Healthcare runs 24/7 and so does Zen. Our after-hours patient bookings increased by 300%. I can finally sleep without missing calls."</p><div class="testimonial-author"><div class="author-avatar">DSJ</div><div><span class="author-name">Dr. Sarah Johnson</span><span class="author-role">Medical Practice Owner — Atlanta, GA</span></div></div></div>
+      <div class="rotating-card"><div class="stars">★★★★★</div><p class="testimonial-quote">"In lending, speed is everything. Zen calls our leads back instantly. We've closed $15M more in loans since implementing Zen."</p><div class="testimonial-author"><div class="author-avatar">DK</div><div><span class="author-name">David Kim</span><span class="author-role">Mortgage Lender — Los Angeles, CA</span></div></div></div>
+      <div class="rotating-card"><div class="stars">★★★★★</div><p class="testimonial-quote">"My agency handles 50+ clients. Zen qualifies every lead before it reaches me. I only talk to serious buyers now. Game changer."</p><div class="testimonial-author"><div class="author-avatar">PP</div><div><span class="author-name">Priya Patel</span><span class="author-role">Digital Marketing Agency — New York, NY</span></div></div></div>
+      <div class="rotating-card"><div class="stars">★★★★★</div><p class="testimonial-quote">"Car buyers call multiple dealerships. Zen calls them back in under 30 seconds. We're now FIRST every time. Sales up 40%."</p><div class="testimonial-author"><div class="author-avatar">AH</div><div><span class="author-name">Ahmed Hassan</span><span class="author-role">Auto Dealership Owner — Detroit, MI</span></div></div></div>
+      <div class="rotating-card"><div class="stars">★★★★★</div><p class="testimonial-quote">"Plumbing emergencies can't wait. Zen answers every call at 2 AM. We've grown from 3 to 12 trucks in 8 months."</p><div class="testimonial-author"><div class="author-avatar">CM</div><div><span class="author-name">Carlos Mendez</span><span class="author-role">Home Services Owner — Miami, FL</span></div></div></div>
+      <div class="rotating-dots">
+        <span class="rotating-dot active" onclick="goToTestimonial(0)"></span>
+        <span class="rotating-dot" onclick="goToTestimonial(1)"></span>
+        <span class="rotating-dot" onclick="goToTestimonial(2)"></span>
+        <span class="rotating-dot" onclick="goToTestimonial(3)"></span>
+        <span class="rotating-dot" onclick="goToTestimonial(4)"></span>
+        <span class="rotating-dot" onclick="goToTestimonial(5)"></span>
+      </div>
+    </div>
+
+    <div class="results-metrics">
+      <div class="metric-card reveal"><span class="metric-number">3×</span><span class="metric-label">More appointments booked</span></div>
+      <div class="metric-card reveal"><span class="metric-number">60s</span><span class="metric-label">Average lead response time</span></div>
+      <div class="metric-card reveal"><span class="metric-number">18%</span><span class="metric-label">Average lapsed clients recovered</span></div>
+      <div class="metric-card reveal"><span class="metric-number">14d</span><span class="metric-label">From strategy call to live system</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ROI CALCULATOR -->
+<section class="roi-calculator" id="roi-calculator">
+  <div class="section-inner">
+    <div class="roi-header">
+      <p class="section-label">ROI Calculator</p>
+      <h2 class="section-title">See How Much Revenue You're Leaving on the Table</h2>
+      <p class="section-sub">Enter your numbers to see the impact of an AI agent that answers 100% of your calls.</p>
+    </div>
+    <div class="roi-container">
+      <div class="roi-grid">
+        <div class="roi-inputs">
+          <h3>Your Current Numbers</h3>
+          <div class="roi-field">
+            <label>Total Monthly Calls</label>
+            <input type="range" id="monthlyCalls" min="100" max="10000" value="1000" step="100" oninput="updateROI()">
+            <div class="roi-value"><span>100</span><span class="current" id="monthlyCallsVal">1,000</span><span>10,000</span></div>
+          </div>
+          <div class="roi-field">
+            <label>Missed Call Rate</label>
+            <input type="range" id="missedRate" min="1" max="60" value="15" step="1" oninput="updateROI()">
+            <div class="roi-value"><span>1%</span><span class="current" id="missedRateVal">15%</span><span>60%</span></div>
+          </div>
+          <div class="roi-field">
+            <label>Conversion Rate</label>
+            <input type="range" id="conversionRate" min="1" max="60" value="20" step="1" oninput="updateROI()">
+            <div class="roi-value"><span>1%</span><span class="current" id="conversionRateVal">20%</span><span>60%</span></div>
+          </div>
+          <div class="roi-field">
+            <label>Avg. Customer Value</label>
+            <input type="range" id="customerValue" min="50" max="10000" value="500" step="50" oninput="updateROI()">
+            <div class="roi-value"><span>$50</span><span class="current" id="customerValueVal">$500</span><span>$10,000</span></div>
+          </div>
+        </div>
+        <div class="roi-results">
+          <h3>Your Results</h3>
+          <div class="roi-result-row"><span class="roi-result-label">Missed Calls / Month</span><span class="roi-result-value" id="missedPerMonth">150</span></div>
+          <div class="roi-result-row"><span class="roi-result-label">Lost Conversions</span><span class="roi-result-value" id="lostConversions">30</span></div>
+          <div class="roi-result-row"><span class="roi-result-label">Revenue Lost / Month</span><span class="roi-result-value large highlight" id="revenueLost">$15,000</span></div>
+          <div class="roi-yearly">
+            <div class="roi-yearly-label">Additional Revenue with Zenvaio</div>
+            <div class="roi-yearly-value" id="yearlyRevenue">+$15,000/mo</div>
+            <div class="roi-yearly-label" id="yearlyTotal">$180,000 / year</div>
+          </div>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:40px">
+        <a href="mailto:hello@zenvaio.com" class="btn-primary">Book a Free Strategy Call →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about">
+  <div class="section-inner">
+    <p class="section-label reveal">About Zenvaio</p>
+    <h2 class="section-title reveal">Building AI Systems That Make Your Business Faster</h2>
+    <p class="section-sub reveal">More responsive. More profitable. That is the Zenvaio promise.</p>
+    <div class="about-grid">
+      <div class="about-text">
+        <h3>Our Mission</h3>
+        <p>At Zenvaio, we develop cutting-edge voice AI solutions that transform how businesses handle their most critical moment — the first touchpoint with potential customers. We specialise in creating conversational AI that captures leads at their peak interest and engages them instantly, ensuring no opportunity slips through the cracks.</p>
+        <p>Rather than replacing your team, our solutions enhance your sales process by handling the repetitive tasks of immediate follow-up and lead qualification.</p>
+        <h3 style="margin-top:24px">Our Vision</h3>
+        <p>To become the go-to AI automation partner for SMEs across North America — known for delivering measurable, real-world results through smart automation that feels human.</p>
+        <div class="about-values">
+          <div class="about-value"><h4>Results Over Promises</h4><p>We measure success by the revenue and time our clients get back.</p></div>
+          <div class="about-value"><h4>Simplicity for the Client</h4><p>Our clients are business owners, not tech experts. We handle the complexity.</p></div>
+          <div class="about-value"><h4>Speed That Matters</h4><p>In business, the first to respond wins. We build systems that respond in seconds.</p></div>
+          <div class="about-value"><h4>Continuous Improvement</h4><p>AI moves fast. We stay ahead so our clients do not have to.</p></div>
+        </div>
+      </div>
+      <div class="about-founder">
+        <div class="founder-header">
+          <div class="founder-avatar">F</div>
+          <div class="founder-info"><h4>Fahima</h4><p>Founder &amp; CEO, Zenvaio</p></div>
+        </div>
+        <p class="founder-quote">"Fahima founded Zenvaio with a mission to help small and medium businesses compete with enterprise-level lead response. Her vision: AI that works for you 24/7, so you never miss an opportunity again."</p>
+        <p class="founder-quote" style="margin-top:16px">"We build and run the AI systems that make your business faster, more responsive, and more profitable — so you can focus on what you do best."</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAP -->
+<section class="map-section">
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d184552.57268578046!2d-79.51814089428225!3d43.71815566213007!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89d4cb90d7c63ba5%3A0x323555502ab4c477!2sToronto%2C%20ON%2C%20Canada!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  <div class="map-overlay">
+    <h4>Zenvaio Headquarters</h4>
+    <p>Toronto, Ontario, Canada<br>hello@zenvaio.com</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="section-inner">
+    <p class="section-label reveal">FAQ</p>
+    <h2 class="section-title reveal">Everything You Need to Know About Zen</h2>
+    <p class="section-sub reveal">And how it can help your business grow.</p>
+    <div class="faq-container">
+      <div class="faq-item"><div class="faq-question" onclick="toggleFAQ(this)">How do you customise the solution?</div><div class="faq-answer"><p>We start with a strategy call to understand your business, workflows, and goals. Then we configure your AI agent with your brand voice, qualifying questions, and integration requirements.</p></div></div>
+      <div class="faq-item"><div class="faq-question" onclick="toggleFAQ(this)">What is the typical implementation timeline?</div><div class="faq-answer"><p>Most systems go live within 14 days. Complex integrations may take up to 21 days. We handle all the technical setup and testing — you don't need to do anything.</p></div></div>
+      <div class="faq-item"><div class="faq-question" onclick="toggleFAQ(this)">Do you support multiple languages?</div><div class="faq-answer"><p>Yes! Zen supports English, Spanish, French, and Mandarin. Additional languages available on request for Full Stack clients.</p></div></div>
+      <div class="faq-item"><div class="faq-question" onclick="toggleFAQ(this)">What if my business has unique integration needs?</div><div class="faq-answer"><p>We integrate with 50+ tools including HubSpot, Salesforce, Zoho, Pipedrive, Monday, Calendly, and custom APIs. If we don't have it, we'll build it.</p></div></div>
+      <div class="faq-item"><div class="faq-question" onclick="toggleFAQ(this)">Can Zen transfer calls to a real person?</div><div class="faq-answer"><p>Absolutely. Zen can warm-transfer qualified leads to your sales team, or escalate urgent calls based on your rules.</p></div></div>
+      <div class="faq-item"><div class="faq-question" onclick="toggleFAQ(this)">How does billing work?</div><div class="faq-answer"><p>Simple monthly billing with no hidden fees. Starter plans are month-to-month. Growth and Full Stack plans offer annual discounts.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="cta-banner">
+  <h2>Wondering What This Could Look Like for Your Business?</h2>
+  <p>Book a free 30-minute strategy call and we'll map out a custom automation system built around your specific needs.</p>
+  <a href="mailto:hello@zenvaio.com" class="btn-dark">Book a Free Strategy Call →</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="#" class="nav-logo">
+        <svg class="nav-logo-svg" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="40" height="40" rx="8" fill="#00C896"/>
+          <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle"
+            font-family="'Plus Jakarta Sans', Arial, sans-serif"
+            font-size="16" font-weight="800" fill="#0D1F2D">ZV</text>
+        </svg>
+        <span class="nav-logo-text">ZEN<span>V</span>AIO</span>
+      </a>
+      <p>AI-powered automation systems designed and managed for growing businesses.</p>
+      <div class="footer-contact-info">
+        <p><a href="mailto:hello@zenvaio.com">hello@zenvaio.com</a></p>
+        <p style="color:rgba(255,255,255,0.4)">Toronto, Ontario, Canada</p>
+      </div>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="#how-it-works">How it Works</a>
+        <a href="#services">Services</a>
+        <a href="#industry-selector">Try Zen</a>
+      </div>
+      <div class="footer-col">
+        <h4>Industries</h4>
+        <a href="#industry-selector">Real Estate</a>
+        <a href="#industry-selector">Mortgage Lending</a>
+        <a href="#industry-selector">Healthcare</a>
+        <a href="#industry-selector">Home Services</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#about">About Us</a>
+        <a href="#faq">FAQ</a>
+        <a href="mailto:hello@zenvaio.com">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Zenvaio. All rights reserved.</p>
+    <div class="footer-bottom-links">
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="mailto:hello@zenvaio.com">hello@zenvaio.com</a>
+    </div>
+  </div>
+</footer>
+
+<!-- SCROLL TOP -->
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- STICKY MOBILE CTA -->
+<div class="sticky-mobile-cta" id="stickyMobile" style="display:none">
+  <a href="mailto:hello@zenvaio.com">Book a Free Strategy Call</a>
+</div>
+
+<script>
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      revealObs.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+reveals.forEach(el => revealObs.observe(el));
+
+// Scroll top + sticky mobile CTA
+let heroCTABottom = 0;
+window.addEventListener('load', () => {
+  const heroBtn = document.querySelector('.hero-btns');
+  if (heroBtn) heroCTABottom = heroBtn.getBoundingClientRect().bottom + window.scrollY;
+});
+window.addEventListener('scroll', () => {
+  const scrollTop = document.getElementById('scrollTop');
+  const stickyMobile = document.getElementById('stickyMobile');
+  if (window.scrollY > 500) scrollTop.classList.add('visible');
+  else scrollTop.classList.remove('visible');
+  if (window.innerWidth <= 768 && window.scrollY > (heroCTABottom || 300)) {
+    stickyMobile.style.display = 'block';
+  } else {
+    stickyMobile.style.display = 'none';
+  }
+});
+
+// Rotating testimonials
+let currentTestimonial = 0;
+const testimonialCards = document.querySelectorAll('.rotating-card');
+const testimonialDots = document.querySelectorAll('.rotating-dot');
+function goToTestimonial(index) {
+  testimonialCards.forEach(c => c.classList.remove('active'));
+  testimonialDots.forEach(d => d.classList.remove('active'));
+  testimonialCards[index].classList.add('active');
+  testimonialDots[index].classList.add('active');
+  currentTestimonial = index;
+}
+setInterval(() => goToTestimonial((currentTestimonial + 1) % testimonialCards.length), 5000);
+
+// Industry selector
+function selectIndustry(btn, industry, desc) {
+  document.querySelectorAll('.industry-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('selectedIndustry').textContent = 'Selected: ' + industry + ' — ' + desc;
+}
+
+// ROI Calculator
+function updateROI() {
+  const monthlyCalls = parseInt(document.getElementById('monthlyCalls').value);
+  const missedRate = parseInt(document.getElementById('missedRate').value);
+  const conversionRate = parseInt(document.getElementById('conversionRate').value);
+  const customerValue = parseInt(document.getElementById('customerValue').value);
+  document.getElementById('monthlyCallsVal').textContent = monthlyCalls.toLocaleString();
+  document.getElementById('missedRateVal').textContent = missedRate + '%';
+  document.getElementById('conversionRateVal').textContent = conversionRate + '%';
+  document.getElementById('customerValueVal').textContent = '$' + customerValue.toLocaleString();
+  const missed = Math.round(monthlyCalls * (missedRate / 100));
+  const lostConv = Math.round(missed * (conversionRate / 100));
+  const revLost = lostConv * customerValue;
+  document.getElementById('missedPerMonth').textContent = missed.toLocaleString();
+  document.getElementById('lostConversions').textContent = lostConv.toLocaleString();
+  document.getElementById('revenueLost').textContent = '$' + revLost.toLocaleString();
+  document.getElementById('yearlyRevenue').textContent = '+$' + revLost.toLocaleString() + '/mo';
+  document.getElementById('yearlyTotal').textContent = '$' + (revLost * 12).toLocaleString() + ' / year';
+}
+updateROI();
+
+// FAQ toggle
+function toggleFAQ(el) {
+  el.parentElement.classList.toggle('open');
+}
+</script>
+</body>
+</html>
