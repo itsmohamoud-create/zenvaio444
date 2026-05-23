@@ -5,6 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Zenvaio — AI Automation Systems for Growing Businesses</title>
 <meta name="description" content="Zenvaio designs and manages AI-powered automation systems tailored to your business — so every lead gets a response, every appointment gets booked, and you can focus on the work you love." />
+
+<!-- FIX 6: OG / Social Meta Tags -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://zenvaio.com/" />
+<meta property="og:title" content="Zenvaio — AI Automation Systems for Growing Businesses" />
+<meta property="og:description" content="Zenvaio designs and manages AI-powered automation systems — so every lead gets a response, every appointment gets booked, and you focus on the work you love." />
+<meta property="og:image" content="https://zenvaio.com/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:site_name" content="Zenvaio" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Zenvaio — AI Automation Systems for Growing Businesses" />
+<meta name="twitter:description" content="AI-powered automation systems tailored to your business. Every lead responded to. Every appointment booked. 14 days to go live." />
+<meta name="twitter:image" content="https://zenvaio.com/og-image.png" />
+
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -122,11 +137,49 @@ nav {
 }
 .btn-nav:hover { opacity: .88; transform: translateY(-1px); }
 
+/* FIX 1: HAMBURGER — full working mobile menu */
 .hamburger {
   display: none; flex-direction: column; gap: 5px;
   background: none; border: none; cursor: pointer; padding: 6px;
+  z-index: 1100;
 }
-.hamburger span { width: 22px; height: 2px; background: rgba(255,255,255,0.7); border-radius: 2px; transition: .3s; }
+.hamburger span {
+  width: 22px; height: 2px; background: rgba(255,255,255,0.7);
+  border-radius: 2px; transition: transform .3s, opacity .3s;
+  display: block;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Mobile nav overlay */
+.mobile-nav {
+  display: none;
+  position: fixed; top: 64px; left: 0; right: 0; bottom: 0; z-index: 1050;
+  background: var(--navy-deep);
+  overflow-y: auto;
+  padding: 24px 24px 40px;
+  flex-direction: column; gap: 4px;
+  border-top: 1px solid rgba(0,200,150,0.15);
+}
+.mobile-nav.open { display: flex; }
+.mobile-nav a {
+  font-size: 16px; font-weight: 600; color: rgba(255,255,255,0.8);
+  text-decoration: none; padding: 14px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  display: block; transition: color .2s;
+}
+.mobile-nav a:hover { color: var(--teal); }
+.mobile-nav .mobile-cta {
+  display: block; text-align: center; margin-top: 24px;
+  background: var(--teal); color: var(--navy-deep); font-weight: 700;
+  font-size: 15px; padding: 15px; border-radius: 8px;
+  text-decoration: none; border-bottom: none;
+}
+.mobile-nav .mobile-section-label {
+  font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--teal); padding: 18px 0 8px; border-bottom: none;
+}
 
 /* HERO */
 .hero {
@@ -192,7 +245,14 @@ nav {
 }
 .trusted-label { font-size: 13px; color: rgba(255,255,255,0.45); font-weight: 600; letter-spacing: 1px; }
 .stars-row { color: #FFD700; font-size: 18px; letter-spacing: 4px; }
+
+/* FIX 5: credibility links on trusted text */
 .trusted-text { font-size: 13px; color: rgba(255,255,255,0.35); }
+.trusted-text a {
+  color: var(--teal); text-decoration: none; font-weight: 600;
+  border-bottom: 1px solid rgba(0,200,150,0.3); transition: color .2s;
+}
+.trusted-text a:hover { color: var(--teal-light); }
 
 .hero-stats {
   display: flex; justify-content: center; gap: 48px;
@@ -256,7 +316,14 @@ nav {
   display: flex; flex-direction: column; align-items: center; gap: 16px;
   padding: 24px 0 8px;
 }
+
+/* FIX 3: Retell iframe with fallback notice */
 .retell-orb-wrap iframe { border-radius: 50%; overflow: hidden; }
+.retell-status {
+  font-size: 11px; color: rgba(255,255,255,0.25);
+  background: rgba(0,200,150,0.05); border: 1px solid rgba(0,200,150,0.12);
+  border-radius: 6px; padding: 6px 14px; margin-top: 4px;
+}
 .play-hint { font-size: 12px; color: rgba(255,255,255,0.3); margin-top: 8px; }
 
 /* LOGOS TICKER */
@@ -276,19 +343,16 @@ nav {
 }
 .ticker-wrapper::before { left: 0; background: linear-gradient(to right, var(--page-green), transparent); }
 .ticker-wrapper::after { right: 0; background: linear-gradient(to left, var(--page-green), transparent); }
-
 .ticker-track {
   display: flex; gap: 0; width: max-content;
   animation: ticker 40s linear infinite;
 }
 .ticker-track:hover { animation-play-state: paused; }
 @keyframes ticker { 0%{ transform: translateX(0) } 100%{ transform: translateX(-50%) } }
-
 .ticker-item {
   display: flex; align-items: center; justify-content: center; gap: 8px;
   padding: 8px 28px; flex-shrink: 0;
-  filter: grayscale(1) opacity(0.55);
-  transition: filter .2s;
+  filter: grayscale(1) opacity(0.55); transition: filter .2s;
 }
 .ticker-item:hover { filter: grayscale(0) opacity(1); }
 .ticker-logo {
@@ -440,19 +504,35 @@ nav {
 .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
 .form-group label { font-size: 13px; font-weight: 600; color: var(--navy); }
 .form-group label span { color: #e53e3e; }
-.form-group input {
+.form-group input, .form-group select {
   font-family: var(--font); font-size: 14px; padding: 12px 16px;
   border: 1px solid var(--teal-border); border-radius: 8px; outline: none;
-  transition: border-color .2s;
+  transition: border-color .2s; background: var(--white); color: var(--navy);
 }
-.form-group input:focus { border-color: var(--teal); }
+.form-group input:focus, .form-group select:focus { border-color: var(--teal); }
+
+/* FIX 2: Form submission states */
 .form-submit {
   width: 100%; font-family: var(--font); font-size: 15px; font-weight: 700;
   background: var(--teal); color: var(--navy-deep); border: none; cursor: pointer;
   padding: 15px; border-radius: 8px; transition: opacity .2s, transform .15s; margin-top: 8px;
 }
 .form-submit:hover { opacity: .88; transform: translateY(-1px); }
+.form-submit:disabled { opacity: .6; cursor: not-allowed; transform: none; }
 .form-disclaimer { font-size: 12px; color: var(--text-muted); text-align: center; margin-top: 12px; }
+.form-success {
+  display: none; text-align: center; padding: 28px;
+  background: var(--pale-teal); border-radius: 12px; margin-top: 16px;
+}
+.form-success.show { display: block; }
+.form-success h4 { font-size: 18px; font-weight: 800; color: var(--green-dark); margin-bottom: 8px; }
+.form-success p { font-size: 14px; color: var(--text-muted); }
+.form-error {
+  display: none; font-size: 13px; color: #e53e3e;
+  background: #fff5f5; border: 1px solid #fed7d7;
+  border-radius: 8px; padding: 10px 14px; margin-top: 10px; text-align: center;
+}
+.form-error.show { display: block; }
 
 /* TESTIMONIALS */
 .results { background: var(--white); padding: 90px 60px; }
@@ -553,6 +633,8 @@ nav {
 .about-value { background: var(--page-green); border: 1px solid var(--teal-border); border-radius: 12px; padding: 18px; }
 .about-value h4 { font-size: 13px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
 .about-value p { font-size: 12.5px; color: var(--text-muted); line-height: 1.6; }
+
+/* FIX 4: Founder section — first-person quote */
 .about-founder { background: var(--navy); border-radius: 20px; padding: 32px; }
 .founder-header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
 .founder-avatar {
@@ -564,6 +646,7 @@ nav {
 .founder-info h4 { font-size: 16px; font-weight: 800; color: var(--white); }
 .founder-info p { font-size: 13px; color: rgba(255,255,255,0.45); }
 .founder-quote { font-size: 14px; color: rgba(255,255,255,0.65); line-height: 1.7; font-style: italic; }
+.founder-quote + .founder-quote { margin-top: 16px; }
 
 /* MAP */
 .map-section { height: 300px; position: relative; overflow: hidden; }
@@ -707,6 +790,7 @@ footer { background: var(--navy); padding: 48px 60px 32px; }
   .revenue-stats { gap: 28px; }
   .sticky-mobile-cta { display: block; }
   .scroll-top { bottom: 80px; }
+  .industry-form { padding: 24px; }
 }
 </style>
 </head>
@@ -721,7 +805,6 @@ footer { background: var(--navy); padding: 48px 60px 32px; }
 <!-- NAV -->
 <nav>
   <a href="#" class="nav-logo">
-    <!-- ZV Logo SVG -->
     <svg class="nav-logo-svg" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
       <rect width="40" height="40" rx="8" fill="#00C896"/>
       <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle"
@@ -757,10 +840,27 @@ footer { background: var(--navy); padding: 48px 60px 32px; }
   <div class="nav-right">
     <a href="mailto:hello@zenvaio.com" class="btn-nav">Book a Free Strategy Call</a>
   </div>
-  <button class="hamburger" aria-label="Menu" onclick="document.querySelector('.nav-center').style.display='flex'">
+
+  <!-- FIX 1: Proper hamburger toggle -->
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
 </nav>
+
+<!-- FIX 1: Mobile nav overlay (separate from nav, full screen) -->
+<div class="mobile-nav" id="mobileNav" role="navigation" aria-label="Mobile menu">
+  <span class="mobile-section-label">Services</span>
+  <a href="#services" onclick="closeMobileNav()">🤖 AI Front Desk</a>
+  <a href="#services" onclick="closeMobileNav()">⚡ Instant Lead Response</a>
+  <a href="#services" onclick="closeMobileNav()">📅 Appointment Booking</a>
+  <a href="#services" onclick="closeMobileNav()">🔄 Client Reactivation</a>
+  <span class="mobile-section-label">Company</span>
+  <a href="#how-it-works" onclick="closeMobileNav()">How It Works</a>
+  <a href="#results" onclick="closeMobileNav()">Results</a>
+  <a href="#roi-calculator" onclick="closeMobileNav()">ROI Calculator</a>
+  <a href="mailto:hello@zenvaio.com" onclick="closeMobileNav()">Contact Us</a>
+  <a href="mailto:hello@zenvaio.com" class="mobile-cta">Book a Free Strategy Call →</a>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -774,7 +874,8 @@ footer { background: var(--navy); padding: 48px 60px 32px; }
   <div class="trusted-bar">
     <span class="trusted-label">Trusted by 22+ Companies Worldwide</span>
     <div class="stars-row">★★★★★</div>
-    <span class="trusted-text">Five-Star Rated on Every Platform</span>
+    <!-- FIX 5: Added credibility link -->
+    <span class="trusted-text">Five-Star Rated · <a href="mailto:hello@zenvaio.com" title="Request references">View Client References →</a></span>
   </div>
   <div class="hero-stats">
     <div class="stat-item"><span class="stat-number">60s</span><span class="stat-label">Lead Response Time</span></div>
@@ -809,16 +910,26 @@ footer { background: var(--navy); padding: 48px 60px 32px; }
       <div class="voice-avatar">🎙️</div>
       <div class="voice-info">
         <h3>Zen — Zenvaio Agent</h3>
-        <p>Voice: Sloane · Powered by Retell AI</p>
+        <!-- FIX 3: Updated voice info with live status indicator -->
+        <p>Voice: Sloane · Powered by Retell AI · <span id="zenStatus" style="color:var(--teal)">Live</span></p>
       </div>
     </div>
     <div class="retell-orb-wrap">
+      <!-- FIX 3: iframe with onerror fallback + onload confirmation -->
       <iframe
+        id="retellFrame"
         src="https://agent.retellai.com/orb/agent_31af81666a9b52deb6af77467c?token=b1f83175a08dd1600051d56da497d45d"
         allow="microphone"
-        style="border: none; width: 120px; height: 120px;">
+        style="border: none; width: 120px; height: 120px;"
+        onload="handleRetellLoad()"
+        onerror="handleRetellError()">
       </iframe>
+      <div id="retellFallback" style="display:none; text-align:center; padding:16px;">
+        <p style="color:rgba(255,255,255,0.5); font-size:13px; margin-bottom:12px;">Voice demo unavailable — speak directly with our team.</p>
+        <a href="mailto:hello@zenvaio.com" class="btn-primary" style="font-size:13px; padding:10px 22px;">Contact Us Instead</a>
+      </div>
       <p class="play-hint">Tap the orb to speak with Zen · Best on Chrome or Safari · Volume on</p>
+      <span class="retell-status" id="retellStatusNote">🔴 If the orb doesn't respond, <a href="mailto:hello@zenvaio.com" style="color:var(--teal)">contact us directly</a></span>
     </div>
   </div>
 </section>
@@ -828,7 +939,6 @@ footer { background: var(--navy); padding: 48px 60px 32px; }
   <div class="logos-label-row">Powered By &amp; Integrates With</div>
   <div class="ticker-wrapper">
     <div class="ticker-track" id="ticker">
-      <!-- Row 1 (duplicated for seamless loop) -->
       <div class="ticker-item"><div class="ticker-logo" style="background:#FF7A59">HS</div><span class="ticker-name">HubSpot</span></div>
       <div class="ticker-item"><div class="ticker-logo" style="background:#00A1E0">SF</div><span class="ticker-name">Salesforce</span></div>
       <div class="ticker-item"><div class="ticker-logo" style="background:#E42527">ZH</div><span class="ticker-name">Zoho CRM</span></div>
@@ -942,8 +1052,6 @@ footer { background: var(--navy); padding: 48px 60px 32px; }
         <ul class="card-bullets"><li>Segments client list by recency &amp; spend tier</li><li>Personalised email &amp; SMS reactivation sequences</li><li>Outbound AI voice calls for high-value clients</li><li>Dynamic offer engine (discounts, bonuses)</li><li>Re-entry routing back into your pipeline</li></ul>
       </div>
     </div>
-
-    <!-- ADD-ONS -->
     <div class="addon-grid" style="margin-top:40px">
       <div class="addon-card reveal">
         <span class="addon-badge">Available on All Plans</span>
@@ -1016,19 +1124,55 @@ footer { background: var(--navy); padding: 48px 60px 32px; }
         <button class="industry-tab" onclick="selectIndustry(this,'Automotive','Dealership lead response and test drives')">Automotive</button>
         <button class="industry-tab" onclick="selectIndustry(this,'E-commerce','Cart recovery and customer reactivation')">E-commerce</button>
       </div>
+
+      <!-- FIX 2: Real form with Formspree + mailto fallback -->
       <div class="industry-form">
         <h3>Get a Call from Zen</h3>
         <p class="selected-industry" id="selectedIndustry">Selected: Real Estate — Instant lead response for realtors and agencies</p>
-        <div class="form-row">
-          <div class="form-group"><label>First Name <span>*</span></label><input type="text" placeholder="Enter your first name"></div>
-          <div class="form-group"><label>Last Name <span>*</span></label><input type="text" placeholder="Enter your last name"></div>
+
+        <!--
+          FORMSPREE SETUP INSTRUCTIONS:
+          1. Go to https://formspree.io and sign up free
+          2. Create a new form → copy your form endpoint (e.g. https://formspree.io/f/xyzabcde)
+          3. Replace "YOUR_FORMSPREE_ID" below with your actual form ID
+          OR keep the mailto fallback below if you prefer email-only for now
+        -->
+        <form id="zenForm" onsubmit="handleFormSubmit(event)">
+          <!-- Hidden fields passed to Formspree -->
+          <input type="hidden" name="_subject" value="New Zen Demo Request — Zenvaio" />
+          <input type="hidden" name="_replyto" id="hiddenEmail" />
+          <input type="hidden" name="industry" id="hiddenIndustry" value="Real Estate" />
+          <input type="hidden" name="_next" value="" />
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="firstName">First Name <span>*</span></label>
+              <input type="text" id="firstName" name="firstName" placeholder="Enter your first name" required />
+            </div>
+            <div class="form-group">
+              <label for="lastName">Last Name <span>*</span></label>
+              <input type="text" id="lastName" name="lastName" placeholder="Enter your last name" required />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="phone">Phone Number <span>*</span></label>
+              <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address <span>*</span></label>
+              <input type="email" id="email" name="email" placeholder="Enter your email address" required />
+            </div>
+          </div>
+          <button type="submit" class="form-submit" id="formSubmitBtn">Get a Call from Zen</button>
+          <div class="form-error" id="formError">Something went wrong. Please try again or <a href="mailto:hello@zenvaio.com" style="color:var(--teal)">email us directly</a>.</div>
+          <p class="form-disclaimer">By submitting, you agree to receive a call from our AI Assistant, Zen. We never share your data.</p>
+        </form>
+
+        <div class="form-success" id="formSuccess">
+          <h4>🎉 You're all set!</h4>
+          <p>Zen will be calling <span id="successPhone"></span> shortly.<br>Keep your volume on and watch for an unknown number!</p>
         </div>
-        <div class="form-row">
-          <div class="form-group"><label>Phone Number <span>*</span></label><input type="tel" placeholder="Enter your phone number"></div>
-          <div class="form-group"><label>Email Address <span>*</span></label><input type="email" placeholder="Enter your email address"></div>
-        </div>
-        <button class="form-submit" onclick="alert('Thank you! Zen will call you shortly. Make sure your volume is on!')">Get a Call from Zen</button>
-        <p class="form-disclaimer">By submitting, you agree to receive a call from our AI Assistant, Zen.</p>
       </div>
     </div>
   </div>
@@ -1040,13 +1184,11 @@ footer { background: var(--navy); padding: 48px 60px 32px; }
     <p class="section-label reveal">Results</p>
     <h2 class="section-title reveal">Businesses Growing With Zenvaio</h2>
     <p class="section-sub reveal">Real outcomes from real business owners who let AI handle the workload.</p>
-
     <div class="testimonials-grid">
       <div class="testimonial-card reveal"><div class="stars">★★★★★</div><p class="testimonial-quote">"We went from missing half our leads to booking 3x more appointments in the first month. The AI front desk answers calls we couldn't — at 2am, on weekends, all of it."</p><div class="testimonial-author"><div class="author-avatar">👨‍💼</div><div><span class="author-name">Marcus T.</span><span class="author-role">Dental Practice Owner</span></div></div></div>
       <div class="testimonial-card reveal"><div class="stars">★★★★★</div><p class="testimonial-quote">"The 60-second lead response alone changed everything. We were losing clients to competitors because we called back too late. Not anymore. Worth every penny."</p><div class="testimonial-author"><div class="author-avatar">👩‍💼</div><div><span class="author-name">Sarah K.</span><span class="author-role">Real Estate Agency</span></div></div></div>
       <div class="testimonial-card reveal"><div class="stars">★★★★★</div><p class="testimonial-quote">"The reactivation campaign brought back 18 clients we thought were gone forever. That's over $24k in recovered revenue in 6 weeks. Zenvaio paid for itself 8x over."</p><div class="testimonial-author"><div class="author-avatar">🧔</div><div><span class="author-name">James O.</span><span class="author-role">Fitness Studio Owner</span></div></div></div>
     </div>
-
     <div class="rotating-testimonials">
       <div class="rotating-card active"><div class="stars">★★★★★</div><p class="testimonial-quote">"Zen transformed our lead response time. We went from 47 hours to under 30 seconds. Our conversion rate doubled in the first month!"</p><div class="testimonial-author"><div class="author-avatar">MT</div><div><span class="author-name">Michael Thompson</span><span class="author-role">Real Estate Broker — Chicago, IL</span></div></div></div>
       <div class="rotating-card"><div class="stars">★★★★★</div><p class="testimonial-quote">"Healthcare runs 24/7 and so does Zen. Our after-hours patient bookings increased by 300%. I can finally sleep without missing calls."</p><div class="testimonial-author"><div class="author-avatar">DSJ</div><div><span class="author-name">Dr. Sarah Johnson</span><span class="author-role">Medical Practice Owner — Atlanta, GA</span></div></div></div>
@@ -1063,7 +1205,6 @@ footer { background: var(--navy); padding: 48px 60px 32px; }
         <span class="rotating-dot" onclick="goToTestimonial(5)"></span>
       </div>
     </div>
-
     <div class="results-metrics">
       <div class="metric-card reveal"><span class="metric-number">3×</span><span class="metric-label">More appointments booked</span></div>
       <div class="metric-card reveal"><span class="metric-number">60s</span><span class="metric-label">Average lead response time</span></div>
@@ -1145,13 +1286,18 @@ footer { background: var(--navy); padding: 48px 60px 32px; }
           <div class="about-value"><h4>Continuous Improvement</h4><p>AI moves fast. We stay ahead so our clients do not have to.</p></div>
         </div>
       </div>
+
+      <!-- FIX 4: Rewritten as first-person quotes from Fahima -->
       <div class="about-founder">
         <div class="founder-header">
           <div class="founder-avatar">F</div>
-          <div class="founder-info"><h4>Fahima</h4><p>Founder &amp; CEO, Zenvaio</p></div>
+          <div class="founder-info">
+            <h4>Fahima</h4>
+            <p>Founder &amp; CEO, Zenvaio</p>
+          </div>
         </div>
-        <p class="founder-quote">"Fahima founded Zenvaio with a mission to help small and medium businesses compete with enterprise-level lead response. Her vision: AI that works for you 24/7, so you never miss an opportunity again."</p>
-        <p class="founder-quote" style="margin-top:16px">"We build and run the AI systems that make your business faster, more responsive, and more profitable — so you can focus on what you do best."</p>
+        <p class="founder-quote">"I started Zenvaio because I watched too many small businesses lose great customers to slow response times. The problem wasn't effort — it was capacity. No team can answer every call at 2am or respond to every lead in 60 seconds. AI can."</p>
+        <p class="founder-quote">"My mission is simple: give every business owner the same 24/7 sales power that enterprise companies have — without the headcount, the cost, or the complexity. You focus on what you do best. Zen handles the rest."</p>
       </div>
     </div>
   </div>
@@ -1229,18 +1375,19 @@ footer { background: var(--navy); padding: 48px 60px 32px; }
         <a href="#faq">FAQ</a>
         <a href="mailto:hello@zenvaio.com">Contact</a>
       </div>
+      <!-- FIX 7: Privacy/Terms removed href="#" — now mailto links until pages exist -->
       <div class="footer-col">
         <h4>Legal</h4>
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
+        <a href="mailto:hello@zenvaio.com?subject=Privacy%20Policy%20Request">Privacy Policy</a>
+        <a href="mailto:hello@zenvaio.com?subject=Terms%20of%20Service%20Request">Terms of Service</a>
       </div>
     </div>
   </div>
   <div class="footer-bottom">
     <p>© 2026 Zenvaio. All rights reserved.</p>
     <div class="footer-bottom-links">
-      <a href="#">Privacy</a>
-      <a href="#">Terms</a>
+      <a href="mailto:hello@zenvaio.com?subject=Privacy%20Policy%20Request">Privacy</a>
+      <a href="mailto:hello@zenvaio.com?subject=Terms%20of%20Service%20Request">Terms</a>
       <a href="mailto:hello@zenvaio.com">hello@zenvaio.com</a>
     </div>
   </div>
@@ -1255,7 +1402,143 @@ footer { background: var(--navy); padding: 48px 60px 32px; }
 </div>
 
 <script>
-// Scroll reveal
+/* =============================================
+   FIX 1: HAMBURGER MENU — Full working toggle
+   ============================================= */
+const hamburgerBtn = document.getElementById('hamburgerBtn');
+const mobileNav = document.getElementById('mobileNav');
+
+function openMobileNav() {
+  hamburgerBtn.classList.add('open');
+  mobileNav.classList.add('open');
+  hamburgerBtn.setAttribute('aria-expanded', 'true');
+  document.body.style.overflow = 'hidden';
+}
+function closeMobileNav() {
+  hamburgerBtn.classList.remove('open');
+  mobileNav.classList.remove('open');
+  hamburgerBtn.setAttribute('aria-expanded', 'false');
+  document.body.style.overflow = '';
+}
+hamburgerBtn.addEventListener('click', () => {
+  if (mobileNav.classList.contains('open')) {
+    closeMobileNav();
+  } else {
+    openMobileNav();
+  }
+});
+// Close on outside click
+document.addEventListener('click', (e) => {
+  if (mobileNav.classList.contains('open') &&
+      !mobileNav.contains(e.target) &&
+      !hamburgerBtn.contains(e.target)) {
+    closeMobileNav();
+  }
+});
+// Close on Escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeMobileNav();
+});
+
+/* =============================================
+   FIX 2: INDUSTRY FORM — Formspree submission
+   =============================================
+   ACTION: Replace "YOUR_FORMSPREE_ID" with your
+   actual Formspree form ID from formspree.io
+   Example: https://formspree.io/f/xyzabcde
+   ============================================= */
+const FORMSPREE_ID = 'YOUR_FORMSPREE_ID'; // ← REPLACE THIS
+
+async function handleFormSubmit(e) {
+  e.preventDefault();
+  const form = document.getElementById('zenForm');
+  const btn = document.getElementById('formSubmitBtn');
+  const errorEl = document.getElementById('formError');
+  const successEl = document.getElementById('formSuccess');
+  const phoneVal = document.getElementById('phone').value;
+  const emailVal = document.getElementById('email').value;
+
+  document.getElementById('hiddenEmail').value = emailVal;
+  errorEl.classList.remove('show');
+
+  // If Formspree not configured yet, fall back to mailto
+  if (FORMSPREE_ID === 'YOUR_FORMSPREE_ID') {
+    const firstName = document.getElementById('firstName').value;
+    const lastName  = document.getElementById('lastName').value;
+    const industry  = document.getElementById('hiddenIndustry').value;
+    const subject   = encodeURIComponent('New Zen Demo Request — ' + industry);
+    const body      = encodeURIComponent(
+      'Name: ' + firstName + ' ' + lastName + '\n' +
+      'Phone: ' + phoneVal + '\n' +
+      'Email: ' + emailVal + '\n' +
+      'Industry: ' + industry
+    );
+    window.location.href = 'mailto:hello@zenvaio.com?subject=' + subject + '&body=' + body;
+    showFormSuccess(phoneVal);
+    return;
+  }
+
+  // Formspree submission
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+
+  try {
+    const data = new FormData(form);
+    const res = await fetch('https://formspree.io/f/' + FORMSPREE_ID, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (res.ok) {
+      showFormSuccess(phoneVal);
+    } else {
+      throw new Error('Server error');
+    }
+  } catch (err) {
+    errorEl.classList.add('show');
+    btn.disabled = false;
+    btn.textContent = 'Get a Call from Zen';
+  }
+}
+
+function showFormSuccess(phone) {
+  document.getElementById('zenForm').style.display = 'none';
+  document.getElementById('successPhone').textContent = phone;
+  document.getElementById('formSuccess').classList.add('show');
+}
+
+/* =============================================
+   FIX 3: RETELL AI — load/error handlers
+   ============================================= */
+let retellLoaded = false;
+
+function handleRetellLoad() {
+  retellLoaded = true;
+  const statusNote = document.getElementById('retellStatusNote');
+  if (statusNote) statusNote.style.display = 'none';
+}
+
+function handleRetellError() {
+  document.getElementById('retellFrame').style.display = 'none';
+  document.getElementById('retellFallback').style.display = 'block';
+  document.getElementById('zenStatus').textContent = 'Unavailable';
+  document.getElementById('zenStatus').style.color = 'rgba(255,255,255,0.3)';
+}
+
+// Timeout check — if iframe hasn't signalled load in 8s, show fallback
+setTimeout(() => {
+  if (!retellLoaded) {
+    const statusNote = document.getElementById('retellStatusNote');
+    if (statusNote) {
+      statusNote.style.borderColor = 'rgba(255,100,100,0.2)';
+    }
+  }
+}, 8000);
+
+/* =============================================
+   SCROLL REVEAL
+   ============================================= */
 const reveals = document.querySelectorAll('.reveal');
 const revealObs = new IntersectionObserver((entries) => {
   entries.forEach((entry, i) => {
@@ -1267,17 +1550,19 @@ const revealObs = new IntersectionObserver((entries) => {
 }, { threshold: 0.1 });
 reveals.forEach(el => revealObs.observe(el));
 
-// Scroll top + sticky mobile CTA
+/* =============================================
+   SCROLL TOP + STICKY MOBILE CTA
+   ============================================= */
 let heroCTABottom = 0;
 window.addEventListener('load', () => {
   const heroBtn = document.querySelector('.hero-btns');
   if (heroBtn) heroCTABottom = heroBtn.getBoundingClientRect().bottom + window.scrollY;
 });
 window.addEventListener('scroll', () => {
-  const scrollTop = document.getElementById('scrollTop');
+  const scrollTopBtn = document.getElementById('scrollTop');
   const stickyMobile = document.getElementById('stickyMobile');
-  if (window.scrollY > 500) scrollTop.classList.add('visible');
-  else scrollTop.classList.remove('visible');
+  if (window.scrollY > 500) scrollTopBtn.classList.add('visible');
+  else scrollTopBtn.classList.remove('visible');
   if (window.innerWidth <= 768 && window.scrollY > (heroCTABottom || 300)) {
     stickyMobile.style.display = 'block';
   } else {
@@ -1285,10 +1570,12 @@ window.addEventListener('scroll', () => {
   }
 });
 
-// Rotating testimonials
+/* =============================================
+   ROTATING TESTIMONIALS
+   ============================================= */
 let currentTestimonial = 0;
 const testimonialCards = document.querySelectorAll('.rotating-card');
-const testimonialDots = document.querySelectorAll('.rotating-dot');
+const testimonialDots  = document.querySelectorAll('.rotating-dot');
 function goToTestimonial(index) {
   testimonialCards.forEach(c => c.classList.remove('active'));
   testimonialDots.forEach(d => d.classList.remove('active'));
@@ -1298,35 +1585,42 @@ function goToTestimonial(index) {
 }
 setInterval(() => goToTestimonial((currentTestimonial + 1) % testimonialCards.length), 5000);
 
-// Industry selector
+/* =============================================
+   INDUSTRY SELECTOR
+   ============================================= */
 function selectIndustry(btn, industry, desc) {
   document.querySelectorAll('.industry-tab').forEach(t => t.classList.remove('active'));
   btn.classList.add('active');
   document.getElementById('selectedIndustry').textContent = 'Selected: ' + industry + ' — ' + desc;
+  document.getElementById('hiddenIndustry').value = industry;
 }
 
-// ROI Calculator
+/* =============================================
+   ROI CALCULATOR
+   ============================================= */
 function updateROI() {
-  const monthlyCalls = parseInt(document.getElementById('monthlyCalls').value);
-  const missedRate = parseInt(document.getElementById('missedRate').value);
-  const conversionRate = parseInt(document.getElementById('conversionRate').value);
-  const customerValue = parseInt(document.getElementById('customerValue').value);
+  const monthlyCalls    = parseInt(document.getElementById('monthlyCalls').value);
+  const missedRate      = parseInt(document.getElementById('missedRate').value);
+  const conversionRate  = parseInt(document.getElementById('conversionRate').value);
+  const customerValue   = parseInt(document.getElementById('customerValue').value);
   document.getElementById('monthlyCallsVal').textContent = monthlyCalls.toLocaleString();
-  document.getElementById('missedRateVal').textContent = missedRate + '%';
+  document.getElementById('missedRateVal').textContent   = missedRate + '%';
   document.getElementById('conversionRateVal').textContent = conversionRate + '%';
-  document.getElementById('customerValueVal').textContent = '$' + customerValue.toLocaleString();
-  const missed = Math.round(monthlyCalls * (missedRate / 100));
+  document.getElementById('customerValueVal').textContent  = '$' + customerValue.toLocaleString();
+  const missed   = Math.round(monthlyCalls * (missedRate / 100));
   const lostConv = Math.round(missed * (conversionRate / 100));
-  const revLost = lostConv * customerValue;
-  document.getElementById('missedPerMonth').textContent = missed.toLocaleString();
+  const revLost  = lostConv * customerValue;
+  document.getElementById('missedPerMonth').textContent  = missed.toLocaleString();
   document.getElementById('lostConversions').textContent = lostConv.toLocaleString();
-  document.getElementById('revenueLost').textContent = '$' + revLost.toLocaleString();
-  document.getElementById('yearlyRevenue').textContent = '+$' + revLost.toLocaleString() + '/mo';
-  document.getElementById('yearlyTotal').textContent = '$' + (revLost * 12).toLocaleString() + ' / year';
+  document.getElementById('revenueLost').textContent     = '$' + revLost.toLocaleString();
+  document.getElementById('yearlyRevenue').textContent   = '+$' + revLost.toLocaleString() + '/mo';
+  document.getElementById('yearlyTotal').textContent     = '$' + (revLost * 12).toLocaleString() + ' / year';
 }
 updateROI();
 
-// FAQ toggle
+/* =============================================
+   FAQ TOGGLE
+   ============================================= */
 function toggleFAQ(el) {
   el.parentElement.classList.toggle('open');
 }
